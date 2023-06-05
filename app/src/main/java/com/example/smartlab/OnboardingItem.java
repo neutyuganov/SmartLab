@@ -1,31 +1,14 @@
 package com.example.smartlab;
 
 public class OnboardingItem {
-    private int image;
-    private String title;
-    private String description;
+    int image;
+    String title;
+    String description;
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
+    public OnboardingItem(int image, String title, String description){
         this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
+        this.description = description;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String text) {
-        this.description = text;
     }
 }
