@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Smartlab</string>
+    <string name="app_name">Смартлаб</string>
+    <string name="text_analyzes">Экспресс сбор и получение проб</string>
+    <string name="title_analyzes">Анализы</string>
+    <string name="text_notifications">Вы быстро узнаете о результатах</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="text_monitoring">Наши врачи всегда наблюдают за вашими показателями здоровья</string>
+    <string name="title_monitoring">Мониторинг</string>
 </resources>
