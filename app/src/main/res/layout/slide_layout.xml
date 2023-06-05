@@ -5,50 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/lato_semi_bold"
-        android:text="Анализы"
-        android:gravity="center"
-        android:textColor="@color/colorTextHeading"
-        android:textSize="20sp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="217dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="29dp"
-        android:fontFamily="@font/sf_pro_display_regular"
-        android:gravity="center"
-        android:singleLine="false"
-        android:text="Экспресс сбор и получение проб"
-        android:textColor="@color/colorTextAdditional"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/lato_semi_bold"
+            android:gravity="center"
+            android:text="Анализы"
+            android:textColor="@color/colorTextHeading"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="29dp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text="Экспресс сбор и получение проб"
+            android:textColor="@color/colorTextAdditional"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
         android:adjustViewBounds="true"
         android:src="@drawable/image_analyzes"
-        android:layout_marginBottom="54dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

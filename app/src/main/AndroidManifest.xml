@@ -16,9 +16,6 @@
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".OnboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".SplashScreen"
             android:exported="true" >
             <intent-filter>
