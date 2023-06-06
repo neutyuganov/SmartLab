@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:paddingTop="22dp"
     android:orientation="vertical"
-    android:layout_marginTop="5dp"
-    tools:context=".MainActivity">
+    tools:context=".OnboardActivity">
 
-        <TextView
-            android:id="@+id/buttonSkip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:fontFamily="@font/lato_semi_bold"
-            android:text="Пропустить"
-            android:textColor="@color/colorOnboardPrimary"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/buttonSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:fontFamily="@font/lato_semi_bold"
+        android:text="Пропустить"
+        android:textColor="@color/colorOnboardPrimary"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"

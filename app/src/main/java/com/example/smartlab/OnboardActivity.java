@@ -4,15 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class OnboardActivity extends AppCompatActivity {
 
     ViewPager mSlideViewPager;
     LinearLayout mDotLayout;
@@ -24,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        Window window = getWindow();
+        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        setContentView(R.layout.onboard_activity);
 
         btn_skip = findViewById(R.id.buttonSkip);
 
@@ -36,15 +40,12 @@ public class MainActivity extends AppCompatActivity {
                     mSlideViewPager.setCurrentItem(getitem(1),true);
                 else {
 
-                    Intent i = new Intent(MainActivity.this,MainActivity2.class);
+                    Intent i = new Intent(OnboardActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();
-
                 }
-
             }
         });
-
 
         mSlideViewPager = (ViewPager) findViewById(R.id.onboardViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.linearLayout);
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0 ; i < dots.length ; i++){
 
             dots[i] = new ImageView(this);
+            dots[i].setPaddingRelative(8,0,8,0);
             dots[i].setImageResource(R.drawable.indicator_inactive);
             mDotLayout.addView(dots[i]);
         }
