@@ -78,7 +78,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
 
         pin1.addTextChangedListener(new TextWatcher() {
 
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(sb.length()==1)
@@ -89,11 +88,15 @@ public class EmailVerifyActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 if(sb.length()==0&pin1.length()==1)
                 {
                     sb.append(s);
                     password[0]=sb.toString();
+                    if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
+                        String pincode = String.join("", password);
+                        Toast.makeText(getApplicationContext(), pincode,
+                                Toast.LENGTH_SHORT).show();
+                    }
                     pin2.requestFocus();
                     pin2.setCursorVisible(false);
                 }
@@ -104,11 +107,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0)
                 {
                     password[0]=null;
-
-                        String pincode = String.join("", password);
-                        Toast.makeText(getApplicationContext(), pincode,
-                                Toast.LENGTH_SHORT).show();
-
                     pin1.requestFocus();
                 }
             }
@@ -123,15 +121,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 {
                     sb.deleteCharAt(0);
                 }
-                if(pin2.length()==0){
-
-                    password[1]=null;
-                    String pincode = String.join("", password);
-                    Toast.makeText(getApplicationContext(), pincode,
-                            Toast.LENGTH_SHORT).show();
-
-                    pin1.requestFocus();
-                }
             }
 
             @Override
@@ -141,6 +130,11 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 {
                     sb.append(s);
                     password[1]=sb.toString();
+                    if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
+                        String pincode = String.join("", password);
+                        Toast.makeText(getApplicationContext(), pincode,
+                                Toast.LENGTH_SHORT).show();
+                    }
                     pin3.requestFocus();
                     pin3.setCursorVisible(false);
                 }
@@ -151,11 +145,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0)
                 {
                     password[1]=null;
-
-                        String pincode = String.join("", password);
-                        Toast.makeText(getApplicationContext(), pincode,
-                                Toast.LENGTH_SHORT).show();
-
                     pin1.requestFocus();
                 }
             }
@@ -170,16 +159,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 {
                     sb.deleteCharAt(0);
                 }
-
-                if(pin3.length()==0){
-
-                    password[2]=null;
-                    String pincode = String.join("", password);
-                    Toast.makeText(getApplicationContext(), pincode,
-                            Toast.LENGTH_SHORT).show();
-
-                    pin1.requestFocus();
-                }
             }
 
             @Override
@@ -188,6 +167,11 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 {
                     sb.append(s);
                     password[2]=sb.toString();
+                    if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
+                        String pincode = String.join("", password);
+                        Toast.makeText(getApplicationContext(), pincode,
+                                Toast.LENGTH_SHORT).show();
+                    }
                     pin4.requestFocus();
                     pin4.setCursorVisible(false);
                 }
@@ -198,10 +182,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0)
                 {
                     password[2]=null;
-                        String pincode = String.join("", password);
-                        Toast.makeText(getApplicationContext(), pincode,
-                                Toast.LENGTH_SHORT).show();
-
                     pin2.requestFocus();
                 }
             }
@@ -229,7 +209,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), pincode,
                             Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
 
@@ -238,10 +217,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0)
                 {
                     password[3]=null;
-                        String pincode = String.join("", password);
-                        Toast.makeText(getApplicationContext(), pincode,
-                                Toast.LENGTH_SHORT).show();
-
                     pin3.requestFocus();
                 }
             }

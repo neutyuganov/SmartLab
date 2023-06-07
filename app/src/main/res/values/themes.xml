@@ -2,5 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textColorHighlight">#4D1A6FEE</item>
+        <item name="android:textCursorDrawable">@drawable/edittext_cursor</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorTextSecondary</item>
     </style>
 </resources>

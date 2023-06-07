@@ -70,7 +70,6 @@
         android:background="@drawable/edittext_login"
         android:inputType="textEmailAddress"
         android:hint="example@mail.ru"
-        android:textColorHint="@color/colorTextAdditional"
         android:padding="14dp"
         android:textColor="@color/black"
         android:textSize="15dp" />
