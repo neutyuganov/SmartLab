@@ -127,6 +127,16 @@
             android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/colorTextSecondary"/>
 
+        <TextView
+            android:id="@+id/correctPin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:text=""
+            android:textSize="15sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textColor="@color/colorAccent"/>
         
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

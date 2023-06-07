@@ -3,9 +3,12 @@ package com.example.smartlab;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,6 +25,8 @@ public class OnboardActivity extends AppCompatActivity {
     ImageView[] dots;
     ViewPagerAdapter viewPagerAdapter;
 
+    Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,8 @@ public class OnboardActivity extends AppCompatActivity {
 
         btn_skip = findViewById(R.id.buttonSkip);
 
+        vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+
         btn_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +46,7 @@ public class OnboardActivity extends AppCompatActivity {
                 if (getitem(0) < 2)
                     mSlideViewPager.setCurrentItem(getitem(1),true);
                 else {
-
+                    btn_skip.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                     Intent i = new Intent(OnboardActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();

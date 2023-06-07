@@ -2,12 +2,15 @@ package com.example.smartlab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,10 +32,12 @@ public class LoginActivity extends AppCompatActivity {
         EditText email = (EditText)findViewById(R.id.edit_text_email);
         Button bt_login = (Button) findViewById(R.id.button_go_login);
         Button bt_login_yandex = (Button) findViewById(R.id.button_go_login_yandex);
+        Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bt_login.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Intent i = new Intent(LoginActivity.this, EmailVerifyActivity.class);
                 startActivity(i);
                 finish();

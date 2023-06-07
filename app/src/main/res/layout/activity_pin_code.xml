@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="48dp"
+    android:paddingHorizontal="20dp"
+    android:orientation="vertical"
+    tools:context=".PinCodeActivity">
+
+    <TextView
+        android:id="@+id/buttonSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Пропустить"
+        android:layout_gravity="right"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:text="Создайте пароль"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:text="Для защиты ваших персональных данных"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <View
+            android:id="@+id/indicator1"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/disenabled_indicator" />
+
+        <View
+            android:id="@+id/indicator2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/disenabled_indicator" />
+
+        <View
+            android:id="@+id/indicator3"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="6dp"
+
+            android:background="@drawable/disenabled_indicator" />
+
+        <View
+            android:id="@+id/indicator4"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/disenabled_indicator" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <TableRow>
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:layout_marginHorizontal="24dp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="3" />
+        </TableRow>
+
+        <TableRow android:layout_marginTop="24dp">
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:layout_marginHorizontal="24dp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="6" />
+        </TableRow>
+
+        <TableRow android:layout_marginTop="24dp">
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:layout_marginHorizontal="24dp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:textSize="24sp"
+                android:textColor="@drawable/button_pin_text"
+                android:background="@drawable/button_pin"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="9" />
+        </TableRow>
+
+        <TableRow android:layout_marginTop="24dp">
+
+            <Button
+                android:id="@+id/button0"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="24dp"
+                android:background="@drawable/button_pin"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:text="0"
+                android:textColor="@drawable/button_pin_text"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/backspace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="center"
+                android:padding="12dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/backspace" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
