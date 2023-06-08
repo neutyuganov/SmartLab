@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
                 bt_login.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Intent i = new Intent(LoginActivity.this, EmailVerifyActivity.class);
                 startActivity(i);
-                finish();
             }
         });
 

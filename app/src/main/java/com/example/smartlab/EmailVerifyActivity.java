@@ -57,8 +57,10 @@ public class EmailVerifyActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                back.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 onBackPressed();
             }
+
         });
 
         Integer password[] = new Integer[4];
@@ -229,7 +231,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(i==correct_code.length-1){
                     Intent intent = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
                     startActivity(intent);
-                    finish();
+                    finishAffinity();
                     correctPin.setText(null);
                 }
             }
