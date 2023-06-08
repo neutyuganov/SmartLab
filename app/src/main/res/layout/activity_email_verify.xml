@@ -69,16 +69,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"
+                android:background="@drawable/editiext_email_pin"
+                android:cursorVisible="false"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:gravity="center"
+                android:inputType="number"
                 android:maxLength="1"
                 android:selectAllOnFocus="true"
-                android:cursorVisible="false"
-                android:textColorHighlight="#00FFFFFF"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:fontFamily="@font/sf_pro_display_regular"
                 android:textColor="@color/colorTextPrimary"
-                android:background="@drawable/editiext_email_pin"
-                android:inputType="number" />
+                android:textColorHighlight="#00FFFFFF"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editTextPIN3"

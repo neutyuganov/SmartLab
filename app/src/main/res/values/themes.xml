@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorTextSecondary</item>
     </style>
+
+    <style name="spinner_style" >
+        <item name="android:background">@drawable/spinner</item>
+    </style>
 </resources>

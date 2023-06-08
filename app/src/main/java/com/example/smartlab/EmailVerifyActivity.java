@@ -12,21 +12,14 @@ import android.text.TextWatcher;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 public class EmailVerifyActivity extends AppCompatActivity {
 
-    String correct_code = "0000";
+    Integer[] correct_code = {0,0,0,0};
     EditText pin1;
     EditText pin2;
     EditText pin3;
@@ -71,7 +64,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
             }
         });
 
-        String password[] = new String[4];
+        Integer password[] = new Integer[4];
 
         StringBuilder sb = new StringBuilder();
 
@@ -103,17 +96,9 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0&pin1.length()==1)
                 {
                     sb.append(s);
-                    password[0]=sb.toString();
+                    password[0]=Integer.valueOf(sb.toString());
                     if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
-                        String pincode = String.join("", password);
-                        Toast.makeText(getApplicationContext(), pincode,
-                                Toast.LENGTH_SHORT).show();
-//                        ------------------------------------------------------------------------------
-                        Intent i = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
-                        startActivity(i);
-                        finish();
-//                        correctEmailCode(pincode,correct_code);
-
+                        correctEmailCode(password,correct_code);
                     }
                     pin2.requestFocus();
                     pin2.setCursorVisible(false);
@@ -147,14 +132,9 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0&pin2.length()==1)
                 {
                     sb.append(s);
-                    password[1]=sb.toString();
+                    password[1]=Integer.valueOf(sb.toString());
                     if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
-                        String pincode = String.join("", password);
-//                        ------------------------------------------------------------------------------
-                        Intent i = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
-                        startActivity(i);
-                        finish();
-//                        correctEmailCode(pincode,correct_code);
+                        correctEmailCode(password,correct_code);
                     }
                     pin3.requestFocus();
                     pin3.setCursorVisible(false);
@@ -187,14 +167,9 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0&pin3.length()==1)
                 {
                     sb.append(s);
-                    password[2]=sb.toString();
+                    password[2]=Integer.valueOf(sb.toString());
                     if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
-                        String pincode = String.join("", password);
-//                        ------------------------------------------------------------------------------
-                        Intent i = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
-                        startActivity(i);
-                        finish();
-//                        correctEmailCode(pincode,correct_code);
+                        correctEmailCode(password,correct_code);
                     }
                     pin4.requestFocus();
                     pin4.setCursorVisible(false);
@@ -227,16 +202,9 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 if(sb.length()==0&pin4.length()==1)
                 {
                     sb.append(s);
-                    password[3]=sb.toString();
+                    password[3]=Integer.valueOf(sb.toString());
                     if(password[0]!=null & password[1]!=null & password[2]!=null & password[3]!=null){
-                        String pincode = String.join("", password);
-                        Toast.makeText(getApplicationContext(), pincode,
-                                Toast.LENGTH_SHORT).show();
-//                        ------------------------------------------------------------------------------
-                        Intent i = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
-                        startActivity(i);
-                        finish();
-//                        correctEmailCode(pincode,correct_code);
+                        correctEmailCode(password,correct_code);
                     }
                 }
             }
@@ -252,19 +220,23 @@ public class EmailVerifyActivity extends AppCompatActivity {
         });
     }
 
-    /*private void correctEmailCode(String pincode, String correct_code) {
-        if(pincode==correct_code){
-            Intent i = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
-            startActivity(i);
-            finish();
-        }
-        else {
-            vibrator.vibrate(500);
-            correctPin.setText("Неверный код, попробуйте "+ correct_code);
-            Intent i = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
-            startActivity(i);
-            finish();
+    private void correctEmailCode(Integer[] password , Integer[] correct_code) {
+
+        for(int i = 0; i<correct_code.length; i++)
+        {
+            if(password[i]!=correct_code[i]){
+                vibrator.vibrate(500);
+                correctPin.setText("Неверный код, попробуйте " + correct_code[0]+correct_code[1]+correct_code[2]+correct_code[3]);
+            }
+            else if(password[i]==correct_code[i]){
+                if(i==correct_code.length-1){
+                    Intent intent = new Intent(EmailVerifyActivity.this, PinCodeActivity.class);
+                    startActivity(intent);
+                    finish();
+                    correctPin.setText(null);
+                }
+            }
 
         }
-    }*/
+    }
 }

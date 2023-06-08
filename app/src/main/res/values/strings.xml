@@ -6,4 +6,9 @@
     <string name="title_notifications">Уведомления</string>
     <string name="text_monitoring">Наши врачи всегда наблюдают за вашими показателями здоровья</string>
     <string name="title_monitoring">Мониторинг</string>
+
+    <string-array name="gender">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
 </resources>

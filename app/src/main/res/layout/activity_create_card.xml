@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="40dp"
+    android:paddingHorizontal="20dp"
+    android:orientation="vertical"
+    tools:context=".CreateCardActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:text="Создание карты\nпациента"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/buttonSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:text="Пропустить"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Без карты пациента вы не сможете заказать анализы."
+        android:textColor="@color/colorTextSecondary"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="В картах пациентов будут храниться результаты анализов вас и ваших близких."
+        android:textColor="@color/colorTextSecondary"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textSize="14sp"/>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:inputType="textPersonName"
+        android:hint="Имя"
+        android:background="@drawable/edittext"
+        android:padding="14dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@color/colorTextPrimary" />
+
+    <EditText
+        android:id="@+id/editTextPatronymic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:inputType="textPersonName"
+        android:hint="Отчество"
+        android:background="@drawable/edittext"
+        android:padding="14dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@color/colorTextPrimary" />
+
+    <EditText
+        android:id="@+id/editTextSecondName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:inputType="textPersonName"
+        android:hint="Фамилия"
+        android:background="@drawable/edittext"
+        android:padding="14dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@color/colorTextPrimary" />
+
+    <EditText
+        android:id="@+id/editTextBirthDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:inputType="date"
+        android:hint="Дата рождения"
+        android:background="@drawable/edittext"
+        android:padding="14dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@color/colorTextPrimary" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        style="@style/spinner_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext"
+        android:entries="@array/gender"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:padding="14dp"
+        android:spinnerMode="dropdown"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="15sp" />
+
+
+</LinearLayout>

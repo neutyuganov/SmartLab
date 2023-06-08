@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@drawable/edittext_login"
+        android:background="@drawable/edittext"
         android:inputType="textEmailAddress"
         android:hint="example@mail.ru"
         android:padding="14dp"

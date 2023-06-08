@@ -10,6 +10,7 @@ import android.os.Vibrator;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,6 +38,10 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window window = getWindow();
+        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+
         setContentView(R.layout.activity_pin_code);
         pin1 = findViewById(R.id.button1);
         pin2 = findViewById(R.id.button2);
