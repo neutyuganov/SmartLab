@@ -57,10 +57,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Intent i = new Intent(EmailVerifyActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+                onBackPressed();
             }
         });
 

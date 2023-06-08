@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="48dp"
+    android:id="@+id/layout"
     android:paddingHorizontal="20dp"
     android:orientation="vertical"
     tools:context=".PinCodeActivity">
@@ -31,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <TextView
+            android:id="@+id/head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -40,6 +42,7 @@
             android:textSize="24dp" />
 
         <TextView
+            android:id="@+id/Secondtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
