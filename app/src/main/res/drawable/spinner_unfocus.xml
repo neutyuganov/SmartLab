@@ -1,12 +1,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item>
+
         <layer-list>
+
             <item>
                 <shape android:shape="rectangle">
                     <solid android:color="@color/editTextLogIn" />
                     <corners android:radius="10dp" />
-                    <stroke android:color="@color/colorTextSecondary" android:width="1dp"/>
-                    <padding android:right="14dp" />
+                    <stroke android:color="@color/editTextLogInStroke" android:width="1dp"/>
+                    <padding android:bottom="14dp" android:top="14dp" android:right="14dp" android:left="14dp"/>
                 </shape>
             </item>
 

@@ -9,6 +9,7 @@
     </style>
 
     <style name="spinner_style" >
+        <item name="overlapAnchor">true</item>
         <item name="android:background">@drawable/spinner</item>
     </style>
 </resources>
