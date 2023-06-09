@@ -42,7 +42,7 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
     Timer timer;
     private static final String MY_SETTINGS = "my_settings";
     public static final String APP_PREFERENCES_PIN = "passcode";
-
+    public static final String APP_PREFERENCES_SKIP_PIN = "skip_passcode";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +95,6 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                 Context.MODE_PRIVATE);
 
-        boolean hasVisited = sp.getBoolean("hasVisited", false);
-
         if (sp.contains(APP_PREFERENCES_PIN)) {
             head.setText("Введите пароль");
             layout.removeView(btn_skip);
@@ -107,6 +105,11 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.buttonSkip){
+            SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean(APP_PREFERENCES_SKIP_PIN, true);
+            editor.apply();
             Intent mainIntent = new Intent(PinCodeActivity.this, CreateCardActivity.class);
             this.startActivity(mainIntent);
             this.finish();
