@@ -33,13 +33,15 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
 
     TextView btn_skip, text, head;
 
+    boolean flag;
+
     Vibrator vibrator;
 
     ArrayList<String> numberList = new ArrayList<>();
+
     String passCode = "";
     String pinNum1, pinNum2, pinNum3, pinNum4;
 
-    Timer timer;
     private static final String MY_SETTINGS = "my_settings";
     public static final String APP_PREFERENCES_PIN = "passcode";
     public static final String APP_PREFERENCES_SKIP_PIN = "skip_passcode";
@@ -108,13 +110,14 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
             SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                     Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
-            if(sp.contains(APP_PREFERENCES_PIN)){
+            if(flag){
                 sp.edit().remove(APP_PREFERENCES_PIN).apply();
                 passCode(numberList);
                 head.setText("Создайте пароль");
                 btn_skip.setText("Пропустить");
                 numberList.clear();
                 passCode(numberList);
+                flag = false;
             }
             else {
                 editor.putBoolean(APP_PREFERENCES_SKIP_PIN, true);
@@ -226,6 +229,7 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
 
                     if(getPassCode().length()==0){
                         savePassCode(passCode);
+                        flag = true;
                     }
                     else{
                         matchPassCode();
@@ -331,9 +335,7 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
                 pin_indicator3.setBackgroundResource(R.drawable.disenabled_indicator);
                 pin_indicator4.setBackgroundResource(R.drawable.disenabled_indicator);
 
-                SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
-                        Context.MODE_PRIVATE);
-                if (!sp.contains(APP_PREFERENCES_PIN)) {
+                if(flag){
                     head.setText("Повторите пароль");
                     btn_skip.setText("Отмена");
                 }

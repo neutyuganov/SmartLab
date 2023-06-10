@@ -15,9 +15,12 @@
         android:theme="@style/Theme"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateCardActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PinCodeActivity"
             android:exported="false"

@@ -1,5 +1,6 @@
 package com.example.smartlab;
 
+import static com.example.smartlab.CreateCardActivity.APP_PREFERENCES_CARD_FINISH;
 import static com.example.smartlab.PinCodeActivity.APP_PREFERENCES_PIN;
 import static com.example.smartlab.PinCodeActivity.APP_PREFERENCES_SKIP_PIN;
 
@@ -38,6 +39,7 @@ public class SplashScreen extends AppCompatActivity {
 
                 boolean hasVisited = sp.getBoolean("hasVisited", false);
                 boolean hasPinSkip = sp.getBoolean(APP_PREFERENCES_SKIP_PIN, false);
+                boolean hasFinishCard = sp.getBoolean(APP_PREFERENCES_CARD_FINISH, false);
 
                 if (!hasVisited) {
                     SharedPreferences.Editor e = sp.edit();
@@ -48,7 +50,12 @@ public class SplashScreen extends AppCompatActivity {
                     SplashScreen.this.finish();
                 }
                 else {
-                    if(sp.contains(APP_PREFERENCES_PIN)) {
+                    if(hasFinishCard){
+                        Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                        SplashScreen.this.startActivity(i);
+                        SplashScreen.this.finish();
+                    }
+                    else if(sp.contains(APP_PREFERENCES_PIN)) {
                         Intent i = new Intent(SplashScreen.this, PinCodeActivity.class);
                         SplashScreen.this.startActivity(i);
                         SplashScreen.this.finish();

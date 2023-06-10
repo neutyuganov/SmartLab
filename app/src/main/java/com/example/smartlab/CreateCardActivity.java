@@ -1,5 +1,8 @@
 package com.example.smartlab;
 
+import static com.example.smartlab.PinCodeActivity.APP_PREFERENCES_PIN;
+
+import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -23,7 +26,8 @@ import java.util.Calendar;
 public class CreateCardActivity extends AppCompatActivity {
 
     private static final String MY_SETTINGS = "my_settings";
-    public static final String APP_PREFERENCES_PIN = "passcode";
+    public static final String APP_PREFERENCES_CARD_FINISH = "cardFinish";
+
 
     EditText name, secondName, patronymic, dateBirthDay;
 
@@ -146,9 +150,21 @@ public class CreateCardActivity extends AppCompatActivity {
         });
 
         showDialogOnButtonClick();
+
+        button_create_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean(APP_PREFERENCES_CARD_FINISH, true);
+                editor.apply();
+                Intent i = new Intent(CreateCardActivity.this, MainActivity.class);
+                startActivity(i);
+                finishAffinity();
+            }
+        });
     }
-
-
 
    public void showDialogOnButtonClick(){
         dateBirthDay.setOnClickListener(new View.OnClickListener() {
