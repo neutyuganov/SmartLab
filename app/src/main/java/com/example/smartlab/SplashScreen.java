@@ -50,12 +50,12 @@ public class SplashScreen extends AppCompatActivity {
                     SplashScreen.this.finish();
                 }
                 else {
-                    if(hasFinishCard){
+                    /*if(hasFinishCard){
                         Intent i = new Intent(SplashScreen.this, MainActivity.class);
                         SplashScreen.this.startActivity(i);
                         SplashScreen.this.finish();
-                    }
-                    else if(sp.contains(APP_PREFERENCES_PIN)) {
+                    }*/
+                    if(sp.contains(APP_PREFERENCES_PIN)) {
                         Intent i = new Intent(SplashScreen.this, PinCodeActivity.class);
                         SplashScreen.this.startActivity(i);
                         SplashScreen.this.finish();

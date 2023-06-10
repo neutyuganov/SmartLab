@@ -1,5 +1,7 @@
 package com.example.smartlab;
 
+import static com.example.smartlab.CreateCardActivity.APP_PREFERENCES_CARD_FINISH;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -247,8 +249,17 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
             pin_indicator4.setBackgroundResource(R.drawable.access_indicator);
 
             head.setText("Вы вошли");
-            startActivity(new Intent(this, CreateCardActivity.class));
-            this.finish();
+
+            SharedPreferences sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
+            if(!sp.contains(APP_PREFERENCES_CARD_FINISH)){
+                startActivity(new Intent(this, CreateCardActivity.class));
+                this.finish();
+            }
+            else{
+                startActivity(new Intent(this, MainActivity.class));
+                this.finish();
+            }
+
         }
         else {
 
