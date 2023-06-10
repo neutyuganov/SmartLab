@@ -37,6 +37,7 @@ public class SplashScreen extends AppCompatActivity {
                         Context.MODE_PRIVATE);
 
                 boolean hasVisited = sp.getBoolean("hasVisited", false);
+                boolean hasPinSkip = sp.getBoolean(APP_PREFERENCES_SKIP_PIN, false);
 
                 if (!hasVisited) {
                     SharedPreferences.Editor e = sp.edit();
@@ -52,7 +53,7 @@ public class SplashScreen extends AppCompatActivity {
                         SplashScreen.this.startActivity(i);
                         SplashScreen.this.finish();
                     }
-                    else if (!sp.contains(APP_PREFERENCES_PIN) & sp.contains(APP_PREFERENCES_SKIP_PIN)){
+                    else if (!sp.contains(APP_PREFERENCES_PIN) & hasPinSkip){
                         Intent i = new Intent(SplashScreen.this, CreateCardActivity.class);
                         SplashScreen.this.startActivity(i);
                         SplashScreen.this.finish();

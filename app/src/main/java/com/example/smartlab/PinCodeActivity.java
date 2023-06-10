@@ -108,11 +108,22 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
             SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
                     Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
-            editor.putBoolean(APP_PREFERENCES_SKIP_PIN, true);
-            editor.apply();
-            Intent mainIntent = new Intent(PinCodeActivity.this, CreateCardActivity.class);
-            this.startActivity(mainIntent);
-            this.finish();
+            if(sp.contains(APP_PREFERENCES_PIN)){
+                sp.edit().remove(APP_PREFERENCES_PIN).apply();
+                passCode(numberList);
+                head.setText("Создайте пароль");
+                btn_skip.setText("Пропустить");
+                numberList.clear();
+                passCode(numberList);
+            }
+            else {
+                editor.putBoolean(APP_PREFERENCES_SKIP_PIN, true);
+                editor.apply();
+                Intent mainIntent = new Intent(PinCodeActivity.this, CreateCardActivity.class);
+                this.startActivity(mainIntent);
+                this.finish();
+            }
+            btn_skip.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         }
         if (id == R.id.button1) {
             numberList.add("1");
@@ -210,51 +221,11 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
                     pin_indicator2.setBackgroundResource(R.drawable.enabled_indicator);
                     pin_indicator3.setBackgroundResource(R.drawable.enabled_indicator);
                     pin_indicator4.setBackgroundResource(R.drawable.enabled_indicator);
+                    passCodeFinish();
                     passCode = pinNum1+pinNum2+pinNum3+pinNum4;
 
                     if(getPassCode().length()==0){
                         savePassCode(passCode);
-                        new CountDownTimer(250,50){
-
-                            @Override
-                            public void onTick(long l) {
-                                pin0.setEnabled(false);
-                                pin1.setEnabled(false);
-                                pin2.setEnabled(false);
-                                pin3.setEnabled(false);
-                                pin4.setEnabled(false);
-                                pin5.setEnabled(false);
-                                pin6.setEnabled(false);
-                                pin7.setEnabled(false);
-                                pin8.setEnabled(false);
-                                pin9.setEnabled(false);
-                                pin0.setEnabled(false);
-
-                                head.setText("Повторите пароль");
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                numberList.clear();
-                                pin_indicator1.setBackgroundResource(R.drawable.disenabled_indicator);
-                                pin_indicator2.setBackgroundResource(R.drawable.disenabled_indicator);
-                                pin_indicator3.setBackgroundResource(R.drawable.disenabled_indicator);
-                                pin_indicator4.setBackgroundResource(R.drawable.disenabled_indicator);
-
-                                pin0.setEnabled(true);
-                                pin1.setEnabled(true);
-                                pin2.setEnabled(true);
-                                pin3.setEnabled(true);
-                                pin4.setEnabled(true);
-                                pin5.setEnabled(true);
-                                pin6.setEnabled(true);
-                                pin7.setEnabled(true);
-                                pin8.setEnabled(true);
-                                pin9.setEnabled(true);
-                                pin0.setEnabled(true);
-                            }
-                        }.start();
-
                     }
                     else{
                         matchPassCode();
@@ -270,6 +241,8 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
             pin_indicator2.setBackgroundResource(R.drawable.access_indicator);
             pin_indicator3.setBackgroundResource(R.drawable.access_indicator);
             pin_indicator4.setBackgroundResource(R.drawable.access_indicator);
+
+            head.setText("Вы вошли");
             startActivity(new Intent(this, CreateCardActivity.class));
             this.finish();
         }
@@ -331,5 +304,52 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
     private String getPassCode() {
         SharedPreferences preferences = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
         return preferences.getString(APP_PREFERENCES_PIN, "");
+    }
+
+    private void passCodeFinish(){
+        new CountDownTimer(250,50){
+            @Override
+            public void onTick(long l) {
+                pin0.setEnabled(false);
+                pin1.setEnabled(false);
+                pin2.setEnabled(false);
+                pin3.setEnabled(false);
+                pin4.setEnabled(false);
+                pin5.setEnabled(false);
+                pin6.setEnabled(false);
+                pin7.setEnabled(false);
+                pin8.setEnabled(false);
+                pin9.setEnabled(false);
+                pin0.setEnabled(false);
+            }
+
+            @Override
+            public void onFinish() {
+                numberList.clear();
+                pin_indicator1.setBackgroundResource(R.drawable.disenabled_indicator);
+                pin_indicator2.setBackgroundResource(R.drawable.disenabled_indicator);
+                pin_indicator3.setBackgroundResource(R.drawable.disenabled_indicator);
+                pin_indicator4.setBackgroundResource(R.drawable.disenabled_indicator);
+
+                SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
+                        Context.MODE_PRIVATE);
+                if (!sp.contains(APP_PREFERENCES_PIN)) {
+                    head.setText("Повторите пароль");
+                    btn_skip.setText("Отмена");
+                }
+
+                pin0.setEnabled(true);
+                pin1.setEnabled(true);
+                pin2.setEnabled(true);
+                pin3.setEnabled(true);
+                pin4.setEnabled(true);
+                pin5.setEnabled(true);
+                pin6.setEnabled(true);
+                pin7.setEnabled(true);
+                pin8.setEnabled(true);
+                pin9.setEnabled(true);
+                pin0.setEnabled(true);
+            }
+        }.start();
     }
 }
