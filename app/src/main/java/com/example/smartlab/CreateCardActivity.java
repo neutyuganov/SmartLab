@@ -194,16 +194,6 @@ public class CreateCardActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
-                Context.MODE_PRIVATE);
-        if (sp.contains(APP_PREFERENCES_PIN)) {
-            startActivity(new Intent(this, PinCodeActivity.class));
-        }
-    }
-
     private void checkNoEmptyItems(){
         if(name.getText().toString().length() != 0 & secondName.getText().toString().length() != 0 & patronymic.getText().toString().length() != 0 & dateBirthDay.getText().toString().length() != 0){
             button_create_card.setEnabled(true);
