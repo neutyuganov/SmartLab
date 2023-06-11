@@ -9,21 +9,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
-import android.view.ViewStub;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class PinCodeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -256,7 +251,7 @@ public class PinCodeActivity extends AppCompatActivity implements View.OnClickLi
                 this.finish();
             }
             else{
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MenuActivity.class));
                 this.finish();
             }
 

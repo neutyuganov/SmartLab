@@ -1,10 +1,6 @@
 package com.example.smartlab;
 
-import static com.example.smartlab.PinCodeActivity.APP_PREFERENCES_PIN;
-
-import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -159,7 +155,7 @@ public class CreateCardActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putBoolean(APP_PREFERENCES_CARD_FINISH, true);
                 editor.apply();
-                Intent i = new Intent(CreateCardActivity.this, MainActivity.class);
+                Intent i = new Intent(CreateCardActivity.this, MenuActivity.class);
                 startActivity(i);
                 finishAffinity();
             }
