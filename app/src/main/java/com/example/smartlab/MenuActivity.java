@@ -24,29 +24,29 @@ public class MenuActivity extends AppCompatActivity {
 
         menuView = findViewById(R.id.bottomNavigationView);
         menuView.setOnNavigationItemSelectedListener(navListener);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAnalyzes()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
-
-            switch (item.getItemId()) {
-                case R.id.navigation_analyzes:
-                    if(selectedFragment == new FragmentAnalyzes()){
-                        return false;
-                    }
-                    else selectedFragment = new FragmentAnalyzes();
-                    break;
-                case R.id.navigation_results:
-                    selectedFragment = new FragmentResults();
-                    break;
-                case R.id.navigation_help:
-                    selectedFragment = new FragmentHelp();
-                    break;
-                case R.id.navigation_profile:
-                    selectedFragment = new FragmentProfile();
-                    break;
+            int id = item.getItemId();
+            if (id == R.id.navigation_analyzes) {
+                if (selectedFragment == new FragmentAnalyzes()) {
+                    return false;
+                }
+                else selectedFragment = new FragmentAnalyzes();
+            }
+            if (id == R.id.navigation_results) {
+                selectedFragment = new FragmentResults();
+            }
+            if (id == R.id.navigation_profile) {
+                selectedFragment = new FragmentProfile();
+            }
+            if (id == R.id.navigation_help) {
+                selectedFragment = new FragmentHelp();
             }
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
