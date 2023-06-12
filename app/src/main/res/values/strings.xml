@@ -11,6 +11,33 @@
         <item>Мужской</item>
         <item>Женский</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="analyzes_title">
+        <item>ПЦР-тест на определение РНК коронавируса стандартный</item>
+        <item>Клинический анализ крови с лейкоцитарной формулировкой</item>
+        <item>Биохимический анализ крови, базовый</item>
+        <item>СОЭ (венозная кровь)</item>
+        <item>СОЭ (капилярная кровь)</item>
+        <item>Исследования кала на скрытую кровь</item>
+    </string-array>
+
+    <string-array name="analyzes_day">
+        <item>2 дня</item>
+        <item>1 день</item>
+        <item>1 день</item>
+        <item>1 день</item>
+        <item>1 день</item>
+        <item>1 день</item>
+    </string-array>
+
+    <string-array name="analyzes_price">
+        <item>1800 ₽</item>
+        <item>690 ₽</item>
+        <item>2440 ₽</item>
+        <item>350 ₽</item>
+        <item>400 ₽</item>
+        <item>400 ₽</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
