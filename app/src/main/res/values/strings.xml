@@ -39,5 +39,27 @@
         <item>400 ₽</item>
     </string-array>
 
+    <string name="header1">пцр1</string>
+    <string name="header2">пцр2</string>
+    <string name="header3">пцр3</string>
+    <string name="header4">пцр4</string>
+    <string name="header5">пцр5</string>
+    <string name="header6">пцр6</string>
+
+    <string name="price1">18001 ₽</string>
+    <string name="price2">18001 ₽</string>
+    <string name="price3">18002 ₽</string>
+    <string name="price4">18003 ₽</string>
+    <string name="price5">18004 ₽</string>
+    <string name="price6">18005 ₽</string>
+
+    <string name="day1">2 дня</string>
+    <string name="day2">1 день</string>
+    <string name="day3">1 день</string>
+    <string name="day4">1 день</string>
+    <string name="day5">1 день</string>
+    <string name="day6">1 день</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
