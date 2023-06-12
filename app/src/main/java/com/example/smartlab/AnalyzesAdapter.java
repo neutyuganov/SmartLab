@@ -4,21 +4,27 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyViewHolder> {
+public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyViewHolder> implements Filterable {
 
     Context context;
     ArrayList<AnalyzesData> analyzesDataList;
 
+    ArrayList<AnalyzesData> analyzesDataListFull;
+
     public AnalyzesAdapter(Context context, ArrayList<AnalyzesData> analyzesDataList){
         this.context = context;
         this.analyzesDataList = analyzesDataList;
+        analyzesDataListFull = new ArrayList<>(analyzesDataList);
     }
 
     @NonNull
@@ -56,4 +62,40 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
 
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return analyzeFilter;
+    }
+
+    private Filter analyzeFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<AnalyzesData> filteredList = new ArrayList<>();
+
+            if(constraint == null | constraint.length() == 0){
+                filteredList.addAll(analyzesDataListFull);
+            }
+            else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(AnalyzesData item: analyzesDataListFull){
+                    if(item.getTitle().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            analyzesDataList.clear();
+            analyzesDataList.addAll((List)results.values);
+        }
+    };
 }

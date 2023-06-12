@@ -11,4 +11,16 @@ public class AnalyzesData {
         this.day = day;
         this.price = price;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getPrice() {
+        return price;
+    }
 }
