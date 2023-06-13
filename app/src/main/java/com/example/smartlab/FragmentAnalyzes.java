@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,9 @@ public class FragmentAnalyzes extends Fragment {
     private String[] analyzesDataTitle;
     private String[] analyzesDataDay;
     private String[] analyzesDataPrice;
+    private String[] analyzesDataDescription;
+    private String[] analyzesDataPrep;
+    private String[] analyzesDataBio;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,32 +48,37 @@ public class FragmentAnalyzes extends Fragment {
         dataInitialize();
 
         for(int i = 0; i<analyzesDataTitle.length; i++){
-            AnalyzesData analyzesData = new AnalyzesData(analyzesDataTitle[i], analyzesDataDay[i], analyzesDataPrice[i]);
+            AnalyzesData analyzesData = new AnalyzesData(analyzesDataTitle[i],
+                    analyzesDataPrice[i],
+                    analyzesDataDescription[i],
+                    analyzesDataPrep[i],
+                    analyzesDataDay[i],
+                    analyzesDataBio[i]);
             analyzesDataList.add(analyzesData);
         }
 
-        // searchView = null
-        searchView.findViewById(R.id.searchView);
+        /*searchView = view.findViewById(R.id.searchView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Log.d("newText", query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                Log.d("newText", newText);
                 analyzesAdapter.getFilter().filter(newText);
                 return true;
             }
-        });
+        });*/
 
         recyclerView = view.findViewById(R.id.analyzesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         AnalyzesAdapter analyzesAdapter = new AnalyzesAdapter(getContext(), analyzesDataList);
         recyclerView.setAdapter(analyzesAdapter);
-        analyzesAdapter.notifyDataSetChanged();
     }
 
     private void dataInitialize() {
@@ -100,11 +110,32 @@ public class FragmentAnalyzes extends Fragment {
                 getString(R.string.price5),
                 getString(R.string.price6)
         };
-    }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        analyzesDataPrep = new String[]{
+                getString(R.string.price1),
+                getString(R.string.price2),
+                getString(R.string.price3),
+                getString(R.string.price4),
+                getString(R.string.price5),
+                getString(R.string.price6)
+        };
 
+        analyzesDataDescription = new String[]{
+                getString(R.string.price1),
+                getString(R.string.price2),
+                getString(R.string.price3),
+                getString(R.string.price4),
+                getString(R.string.price5),
+                getString(R.string.price6)
+        };
 
+        analyzesDataBio = new String[]{
+                getString(R.string.price1),
+                getString(R.string.price2),
+                getString(R.string.price3),
+                getString(R.string.price4),
+                getString(R.string.price5),
+                getString(R.string.price6)
+        };
     }
 }

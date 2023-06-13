@@ -3,13 +3,19 @@ package com.example.smartlab;
 public class AnalyzesData {
 
     String title;
-    String day;
     String price;
+    String description;
+    String prep;
+    String day;
+    String bio;
 
-    public AnalyzesData(String title, String day, String price) {
+    public AnalyzesData(String title, String price, String description, String prep, String day, String bio) {
         this.title = title;
-        this.day = day;
         this.price = price;
+        this.description = description;
+        this.prep = prep;
+        this.day = day;
+        this.bio = bio;
     }
 
     public String getTitle() {

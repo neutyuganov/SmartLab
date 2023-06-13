@@ -16,17 +16,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyViewHolder> implements Filterable {
+public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyViewHolder> /*implements Filterable*/ {
 
     Context context;
     ArrayList<AnalyzesData> analyzesDataList;
 
-    ArrayList<AnalyzesData> analyzesDataListFull;
+//    ArrayList<AnalyzesData> analyzesDataListFull;
 
     public AnalyzesAdapter(Context context, ArrayList<AnalyzesData> analyzesDataList){
         this.context = context;
         this.analyzesDataList = analyzesDataList;
-        analyzesDataListFull = new ArrayList<>(analyzesDataList);
+//        analyzesDataListFull = new ArrayList<>(analyzesDataList);
     }
 
     @NonNull
@@ -51,7 +51,12 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 bottomSheetDialog.setContentView(R.layout.bottom_sheet_analyze);
                 bottomSheetDialog.show();
-            }
+
+                /*holder.title_bs.setText(analyzesData.title);
+                holder.day_bs.setText(analyzesData.day);
+                holder.description_bs.setText(analyzesData.description);
+                holder.bio_bs.setText(analyzesData.bio);
+                holder.prep_bs.setText(analyzesData.prep);    */        }
         });
     }
 
@@ -64,24 +69,29 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
 
         TextView title, day, price;
 
+//        TextView title_bs, day_bs, price_bs, description_bs, prep_bs, bio_bs;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            /*title_bs = itemView.findViewById(R.id.header_bs);
+            day_bs = itemView.findViewById(R.id.day_bs);
+            description_bs = itemView.findViewById(R.id.description_bs);
+            prep_bs = itemView.findViewById(R.id.prep_bs);
+            bio_bs = itemView.findViewById(R.id.bio_bs);*/
 
             title = itemView.findViewById(R.id.header);
             day = itemView.findViewById(R.id.day);
             price = itemView.findViewById(R.id.price);
-
-
-
         }
     }
 
-    @Override
+    /*@Override
     public Filter getFilter() {
         return analyzeFilter;
-    }
+    }*/
 
-    private Filter analyzeFilter = new Filter() {
+   /* private Filter analyzeFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<AnalyzesData> filteredList = new ArrayList<>();
@@ -110,5 +120,5 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
             analyzesDataList.clear();
             analyzesDataList.addAll((List)results.values);
         }
-    };
+    };*/
 }
