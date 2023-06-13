@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,15 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
         holder.title.setText(analyzesData.title);
         holder.day.setText(analyzesData.day);
         holder.price.setText(analyzesData.price);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                bottomSheetDialog.setContentView(R.layout.bottom_sheet_analyze);
+                bottomSheetDialog.show();
+            }
+        });
     }
 
     @Override
@@ -59,6 +70,8 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
             title = itemView.findViewById(R.id.header);
             day = itemView.findViewById(R.id.day);
             price = itemView.findViewById(R.id.price);
+
+
 
         }
     }
