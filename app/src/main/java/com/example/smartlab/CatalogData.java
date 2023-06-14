@@ -3,13 +3,13 @@ package com.example.smartlab;
 public class CatalogData {
 
     String title;
-    String price;
+    int price;
     String description;
     String prep;
     String time_result;
     String bio;
 
-    public CatalogData(String title, String price, String description, String prep, String time_result, String bio) {
+    public CatalogData(String title, int price, String description, String prep, String time_result, String bio) {
         this.title = title;
         this.price = price;
         this.description = description;
@@ -20,13 +20,5 @@ public class CatalogData {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getTime_result() {
-        return time_result;
-    }
-
-    public String getPrice() {
-        return price;
     }
 }

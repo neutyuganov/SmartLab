@@ -4,19 +4,28 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHolder> /*implements Filterable*/ {
+public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHolder>   {
 
     Context context;
     ArrayList<CatalogData> catalogDataList;
@@ -40,20 +49,58 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHo
         CatalogData catalogData = catalogDataList.get(position);
         holder.title.setText(catalogData.title);
         holder.day.setText(catalogData.time_result);
-        holder.price.setText(catalogData.price);
+        holder.price.setText(catalogData.price+ " ₽");
+
+        holder.button_add.setOnClickListener(new View.OnClickListener() {
+            boolean flag = true;
+            @Override
+            public void onClick(View v) {
+                if(flag) {
+                    flag = false;
+                    holder.button_add.setBackgroundResource(R.drawable.button_delite_item_background);
+                    holder.button_add.setText("Удалить");
+                    holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.buttonLogInActive));
+                }
+                else {
+                    flag = true;
+                    holder.button_add.setBackgroundResource(R.drawable.button_add_item_background);
+                    holder.button_add.setText("Добавить");
+                    holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.white));
+                }
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 bottomSheetDialog.setContentView(R.layout.bottom_sheet_analyze);
-                bottomSheetDialog.show();
 
-                /*holder.title_bs.setText(analyzesData.title);
-                holder.day_bs.setText(analyzesData.day);
-                holder.description_bs.setText(analyzesData.description);
-                holder.bio_bs.setText(analyzesData.bio);
-                holder.prep_bs.setText(analyzesData.prep);    */        }
+                TextView tv_title = bottomSheetDialog.findViewById(R.id.header_bs);
+                TextView tv_description = bottomSheetDialog.findViewById(R.id.description_bs);
+                TextView tv_prep = bottomSheetDialog.findViewById(R.id.prep_bs);
+                TextView tv_time_result = bottomSheetDialog.findViewById(R.id.time_result_bs);
+                TextView tv_bio = bottomSheetDialog.findViewById(R.id.bio_bs);
+                Button bt_price = bottomSheetDialog.findViewById(R.id.button_add_bs);
+
+                tv_title.setText(catalogData.title);
+                tv_description.setText(catalogData.description);
+                tv_prep.setText(catalogData.prep);
+                tv_time_result.setText(catalogData.time_result);
+                tv_bio.setText(catalogData.bio);
+                bt_price.setText("Добавть за " + catalogData.price+ " ₽");
+
+                ImageButton button_back = bottomSheetDialog.findViewById(R.id.button_back_bs);
+
+                    button_back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bottomSheetDialog.dismiss();
+                        }
+                    });
+
+                bottomSheetDialog.show();
+                }
         });
     }
 
@@ -66,20 +113,16 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHo
 
         TextView title, day, price;
 
-//        TextView title_bs, day_bs, price_bs, description_bs, prep_bs, bio_bs;
+        Button button_add;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            /*title_bs = itemView.findViewById(R.id.header_bs);
-            day_bs = itemView.findViewById(R.id.day_bs);
-            description_bs = itemView.findViewById(R.id.description_bs);
-            prep_bs = itemView.findViewById(R.id.prep_bs);
-            bio_bs = itemView.findViewById(R.id.bio_bs);*/
-
             title = itemView.findViewById(R.id.header);
             day = itemView.findViewById(R.id.day);
             price = itemView.findViewById(R.id.price);
+
+            button_add = itemView.findViewById(R.id.button_add_item);
         }
     }
 

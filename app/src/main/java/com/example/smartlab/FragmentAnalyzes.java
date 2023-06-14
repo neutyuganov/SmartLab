@@ -18,19 +18,12 @@ import java.util.ArrayList;
 
 public class FragmentAnalyzes extends Fragment {
 
-
     CatalogAdapter catalogAdapter;
     ArrayList<CatalogData> catalogDataList;
 
     SearchView searchView;
 
     RecyclerView recyclerView;
-    private String[] analyzesDataTitle;
-    private String[] analyzesDataDay;
-    private String[] analyzesDataPrice;
-    private String[] analyzesDataDescription;
-    private String[] analyzesDataPrep;
-    private String[] analyzesDataBio;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,16 +45,6 @@ public class FragmentAnalyzes extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         dataInitialize();
-
-        for(int i = 0; i<analyzesDataTitle.length; i++){
-            CatalogData catalogData = new CatalogData(analyzesDataTitle[i],
-                    analyzesDataPrice[i],
-                    analyzesDataDescription[i],
-                    analyzesDataPrep[i],
-                    analyzesDataDay[i],
-                    analyzesDataBio[i]);
-            catalogDataList.add(catalogData);
-        }
 
         searchView = view.findViewById(R.id.searchView);
 
@@ -90,58 +73,11 @@ public class FragmentAnalyzes extends Fragment {
     private void dataInitialize() {
         catalogDataList = new ArrayList<>();
 
-        analyzesDataTitle = new String[]{
-                getString(R.string.header1),
-                getString(R.string.header2),
-                getString(R.string.header3),
-                getString(R.string.header4),
-                getString(R.string.header5),
-                getString(R.string.header6)
-        };
-
-        analyzesDataDay = new String[]{
-                getString(R.string.day1),
-                getString(R.string.day2),
-                getString(R.string.day3),
-                getString(R.string.day4),
-                getString(R.string.day5),
-                getString(R.string.day6)
-        };
-
-        analyzesDataPrice = new String[]{
-                getString(R.string.price1),
-                getString(R.string.price2),
-                getString(R.string.price3),
-                getString(R.string.price4),
-                getString(R.string.price5),
-                getString(R.string.price6)
-        };
-
-        analyzesDataPrep = new String[]{
-                getString(R.string.price1),
-                getString(R.string.price2),
-                getString(R.string.price3),
-                getString(R.string.price4),
-                getString(R.string.price5),
-                getString(R.string.price6)
-        };
-
-        analyzesDataDescription = new String[]{
-                getString(R.string.price1),
-                getString(R.string.price2),
-                getString(R.string.price3),
-                getString(R.string.price4),
-                getString(R.string.price5),
-                getString(R.string.price6)
-        };
-
-        analyzesDataBio = new String[]{
-                getString(R.string.price1),
-                getString(R.string.price2),
-                getString(R.string.price3),
-                getString(R.string.price4),
-                getString(R.string.price5),
-                getString(R.string.price6)
-        };
+        catalogDataList.add(new CatalogData("ПЦР-тест на определение РНК коронавируса стандартный", 1800, "Описание ПЦР-тест на определение РНКкоронавируса стандартный", "Подготовка к ПЦР-тест на определение РНК коронавируса стандартный", "2 дня", "Венозная кровь"));
+        catalogDataList.add(new CatalogData("ПЦР-тест на определение РНК коронавируса стандартный", 1200, "Описание ПЦР-тест на определение РНКкоронавируса стандартный", "Подготовка к ПЦР-тест на определение РНК коронавируса стандартный", "2 дня", "Венозная кровь"));
+        catalogDataList.add(new CatalogData("Биохимический анализ крови, базовый", 690, "Описание Биохимический анализ крови, базовый", "Подготовка к Биохимический анализ крови, базовый", "2 дня", "биология"));
+        catalogDataList.add(new CatalogData("Биохимический анализ крови, не базовый", 900, "Описание Биохимический анализ крови, не базовый", "Подготовка к Биохимический анализ крови, не базовый", "1 день", "Крутая кровь"));
+        catalogDataList.add(new CatalogData("СОЭ (капиллярная кровь)", 120, "Описание СОЭ (капиллярная кровь)", "Подготовка к СОЭ (капиллярная кровь)", "2 дня", "кровь"));
+        catalogDataList.add(new CatalogData("Клинический анализ крови с лейкоцитарной формулировкой", 300, "Описание Клинический анализ крови с лейкоцитарной формулировкой", "Подготовка к Клинический анализ крови с лейкоцитарной формулировкой", "1 день", "Аретериальная кровь"));
     }
 }
