@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,12 @@ public class FragmentAnalyzes extends Fragment {
         dataInitialize();
 
         searchView = view.findViewById(R.id.searchView);
+
+        RelativeLayout layout = view.findViewById(R.id.layoutFull);
+
+        ConstraintLayout layoutCart = view.findViewById(R.id.layout_cart);
+
+//        layout.removeView(layoutCart);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

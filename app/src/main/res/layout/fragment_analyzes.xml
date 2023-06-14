@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="32dp"
+    android:id="@+id/layoutFull"
     android:orientation="vertical"
     tools:context=".FragmentAnalyzes">
 
@@ -24,10 +25,67 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/analyzesRecyclerView"
-        android:layout_marginTop="8dp"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_analyze"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchView"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_analyze" />
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_cart"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_add_item_background"
+            android:drawableLeft="@drawable/cart"
+            android:drawablePadding="16dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:gravity="left|center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:text="В корзину"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500 ₽"
+            android:layout_margin="15dp"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            app:layout_constraintBottom_toBottomOf="@+id/button_cart"
+            app:layout_constraintEnd_toEndOf="@+id/button_cart"
+            app:layout_constraintTop_toTopOf="@+id/button_cart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
