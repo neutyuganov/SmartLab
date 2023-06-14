@@ -1,20 +1,20 @@
 package com.example.smartlab;
 
-public class AnalyzesData {
+public class CatalogData {
 
     String title;
     String price;
     String description;
     String prep;
-    String day;
+    String time_result;
     String bio;
 
-    public AnalyzesData(String title, String price, String description, String prep, String day, String bio) {
+    public CatalogData(String title, String price, String description, String prep, String time_result, String bio) {
         this.title = title;
         this.price = price;
         this.description = description;
         this.prep = prep;
-        this.day = day;
+        this.time_result = time_result;
         this.bio = bio;
     }
 
@@ -22,8 +22,8 @@ public class AnalyzesData {
         return title;
     }
 
-    public String getDay() {
-        return day;
+    public String getTime_result() {
+        return time_result;
     }
 
     public String getPrice() {

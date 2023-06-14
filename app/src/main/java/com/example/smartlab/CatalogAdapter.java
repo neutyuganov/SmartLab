@@ -16,22 +16,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyViewHolder> /*implements Filterable*/ {
+public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHolder> /*implements Filterable*/ {
 
     Context context;
-    ArrayList<AnalyzesData> analyzesDataList;
+    ArrayList<CatalogData> catalogDataList;
 
-//    ArrayList<AnalyzesData> analyzesDataListFull;
-
-    public AnalyzesAdapter(Context context, ArrayList<AnalyzesData> analyzesDataList){
+    public CatalogAdapter(Context context, ArrayList<CatalogData> catalogDataList){
         this.context = context;
-        this.analyzesDataList = analyzesDataList;
-//        analyzesDataListFull = new ArrayList<>(analyzesDataList);
+        this.catalogDataList = catalogDataList;
     }
 
     @NonNull
     @Override
-    public AnalyzesAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CatalogAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(context).inflate(R.layout.item_analyze, parent, false);
 
@@ -39,11 +36,11 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AnalyzesAdapter.MyViewHolder holder, int position) {
-        AnalyzesData analyzesData = analyzesDataList.get(position);
-        holder.title.setText(analyzesData.title);
-        holder.day.setText(analyzesData.day);
-        holder.price.setText(analyzesData.price);
+    public void onBindViewHolder(@NonNull CatalogAdapter.MyViewHolder holder, int position) {
+        CatalogData catalogData = catalogDataList.get(position);
+        holder.title.setText(catalogData.title);
+        holder.day.setText(catalogData.time_result);
+        holder.price.setText(catalogData.price);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +59,7 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return analyzesDataList.size();
+        return catalogDataList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -86,39 +83,8 @@ public class AnalyzesAdapter extends RecyclerView.Adapter<AnalyzesAdapter.MyView
         }
     }
 
-    /*@Override
-    public Filter getFilter() {
-        return analyzeFilter;
-    }*/
-
-   /* private Filter analyzeFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<AnalyzesData> filteredList = new ArrayList<>();
-
-            if(constraint == null | constraint.length() == 0){
-                filteredList.addAll(analyzesDataListFull);
-            }
-            else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for(AnalyzesData item: analyzesDataListFull){
-                    if(item.getTitle().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }
-                }
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            analyzesDataList.clear();
-            analyzesDataList.addAll((List)results.values);
-        }
-    };*/
+    public void filterList(ArrayList<CatalogData> catalogFilter){
+        this.catalogDataList = catalogFilter;
+        notifyDataSetChanged();
+    }
 }

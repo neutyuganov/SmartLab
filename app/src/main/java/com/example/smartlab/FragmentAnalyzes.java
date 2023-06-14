@@ -11,19 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 
 import java.util.ArrayList;
 
 public class FragmentAnalyzes extends Fragment {
 
 
-    AnalyzesAdapter analyzesAdapter;
-    ArrayList<AnalyzesData> analyzesDataList;
+    CatalogAdapter catalogAdapter;
+    ArrayList<CatalogData> catalogDataList;
 
     SearchView searchView;
 
@@ -40,6 +37,15 @@ public class FragmentAnalyzes extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_analyzes, container, false);
     }
+    private void filter (String search){
+        ArrayList<CatalogData> filterList = new ArrayList<>();
+        for (CatalogData item : catalogDataList){
+            if (item.getTitle().toLowerCase().contains(search.toLowerCase())){
+                filterList.add(item);
+            }
+        }
+        catalogAdapter.filterList(filterList);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
@@ -48,16 +54,16 @@ public class FragmentAnalyzes extends Fragment {
         dataInitialize();
 
         for(int i = 0; i<analyzesDataTitle.length; i++){
-            AnalyzesData analyzesData = new AnalyzesData(analyzesDataTitle[i],
+            CatalogData catalogData = new CatalogData(analyzesDataTitle[i],
                     analyzesDataPrice[i],
                     analyzesDataDescription[i],
                     analyzesDataPrep[i],
                     analyzesDataDay[i],
                     analyzesDataBio[i]);
-            analyzesDataList.add(analyzesData);
+            catalogDataList.add(catalogData);
         }
 
-        /*searchView = view.findViewById(R.id.searchView);
+        searchView = view.findViewById(R.id.searchView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -69,20 +75,20 @@ public class FragmentAnalyzes extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.d("newText", newText);
-                analyzesAdapter.getFilter().filter(newText);
-                return true;
+                filter(newText);
+                return false;
             }
-        });*/
+        });
 
         recyclerView = view.findViewById(R.id.analyzesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        AnalyzesAdapter analyzesAdapter = new AnalyzesAdapter(getContext(), analyzesDataList);
-        recyclerView.setAdapter(analyzesAdapter);
+        catalogAdapter = new CatalogAdapter(getContext(), catalogDataList);
+        recyclerView.setAdapter(catalogAdapter);
     }
 
     private void dataInitialize() {
-        analyzesDataList = new ArrayList<>();
+        catalogDataList = new ArrayList<>();
 
         analyzesDataTitle = new String[]{
                 getString(R.string.header1),

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="60dp"/>
+    <solid android:color="@color/editTextLogInStroke"/>
+    <size android:width="148dp" android:height="124dp"/>
+    <padding android:top="38dp" android:bottom="38dp" android:right="48dp" android:left="48dp"/>
+</shape>
