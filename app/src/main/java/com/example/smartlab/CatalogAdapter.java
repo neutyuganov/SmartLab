@@ -10,6 +10,7 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHo
 
     Context context;
     ArrayList<CatalogData> catalogDataList;
+
 
     public CatalogAdapter(Context context, ArrayList<CatalogData> catalogDataList){
         this.context = context;
@@ -58,7 +60,8 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHo
                 if(flag) {
                     flag = false;
                     holder.button_add.setBackgroundResource(R.drawable.button_delite_item_background);
-                    holder.button_add.setText("Удалить");
+                    holder.button_add.setText("Убрать");
+
                     holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.buttonLogInActive));
                 }
                 else {

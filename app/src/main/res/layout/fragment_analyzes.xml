@@ -23,13 +23,60 @@
         app:queryBackground="@null"
         android:background="@drawable/search_background"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/analyzesRecyclerView"
+    <TextView
+        android:id="@+id/textViewNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:textSize="17sp"
+        android:textColor="@color/colorTextSecondary"
+        android:layout_marginHorizontal="20dp"
         android:layout_below="@+id/searchView"
+        android:text="Акции и новости" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewNews"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_news" />
+
+    <TextView
+        android:id="@+id/textViewCatalog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newsRecyclerView"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
-        android:scrollbars="vertical"
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:text="Каталог анализов"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="17sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCatalog"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_category" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/catalogRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_cart"
+        android:layout_below="@+id/categoryRecyclerView"
+        android:layout_marginTop="8dp"
+        android:scrollbars="none"
         tools:listitem="@layout/item_analyze" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

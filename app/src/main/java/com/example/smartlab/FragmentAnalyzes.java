@@ -21,11 +21,18 @@ import java.util.ArrayList;
 public class FragmentAnalyzes extends Fragment {
 
     CatalogAdapter catalogAdapter;
+    CategoryAdapter categoryAdapter;
+
     ArrayList<CatalogData> catalogDataList;
+    ArrayList<CategoryData> categoryDataList;
 
     SearchView searchView;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewCatalog;
+    RecyclerView recyclerViewCategory;
+
+    RelativeLayout layout;
+    ConstraintLayout layoutCart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,11 +57,11 @@ public class FragmentAnalyzes extends Fragment {
 
         searchView = view.findViewById(R.id.searchView);
 
-        RelativeLayout layout = view.findViewById(R.id.layoutFull);
+        layout = view.findViewById(R.id.layoutFull);
 
-        ConstraintLayout layoutCart = view.findViewById(R.id.layout_cart);
+        layoutCart = view.findViewById(R.id.layout_cart);
 
-//        layout.removeView(layoutCart);
+        layout.removeView(layoutCart);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -71,21 +78,36 @@ public class FragmentAnalyzes extends Fragment {
             }
         });
 
-        recyclerView = view.findViewById(R.id.analyzesRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        recyclerViewCatalog = view.findViewById(R.id.catalogRecyclerView);
+        recyclerViewCatalog.setLayoutManager(new LinearLayoutManager(getContext() ));
+        recyclerViewCatalog.setHasFixedSize(true);
         catalogAdapter = new CatalogAdapter(getContext(), catalogDataList);
-        recyclerView.setAdapter(catalogAdapter);
+        recyclerViewCatalog.setAdapter(catalogAdapter);
+
+
+        recyclerViewCategory = view.findViewById(R.id.categoryRecyclerView);
+        recyclerViewCategory.setHasFixedSize(true);
+        categoryAdapter = new CategoryAdapter(getContext(), categoryDataList);
+        recyclerViewCategory.setAdapter(categoryAdapter);
     }
 
+    public void getButton(){
+        layout.addView(layoutCart);
+    }
     private void dataInitialize() {
         catalogDataList = new ArrayList<>();
-
         catalogDataList.add(new CatalogData("ПЦР-тест на определение РНК коронавируса стандартный", 1800, "Описание ПЦР-тест на определение РНКкоронавируса стандартный", "Подготовка к ПЦР-тест на определение РНК коронавируса стандартный", "2 дня", "Венозная кровь"));
         catalogDataList.add(new CatalogData("ПЦР-тест на определение РНК коронавируса стандартный", 1200, "Описание ПЦР-тест на определение РНКкоронавируса стандартный", "Подготовка к ПЦР-тест на определение РНК коронавируса стандартный", "2 дня", "Венозная кровь"));
         catalogDataList.add(new CatalogData("Биохимический анализ крови, базовый", 690, "Описание Биохимический анализ крови, базовый", "Подготовка к Биохимический анализ крови, базовый", "2 дня", "биология"));
         catalogDataList.add(new CatalogData("Биохимический анализ крови, не базовый", 900, "Описание Биохимический анализ крови, не базовый", "Подготовка к Биохимический анализ крови, не базовый", "1 день", "Крутая кровь"));
         catalogDataList.add(new CatalogData("СОЭ (капиллярная кровь)", 120, "Описание СОЭ (капиллярная кровь)", "Подготовка к СОЭ (капиллярная кровь)", "2 дня", "кровь"));
         catalogDataList.add(new CatalogData("Клинический анализ крови с лейкоцитарной формулировкой", 300, "Описание Клинический анализ крови с лейкоцитарной формулировкой", "Подготовка к Клинический анализ крови с лейкоцитарной формулировкой", "1 день", "Аретериальная кровь"));
+
+
+        categoryDataList = new ArrayList<>();
+        categoryDataList.add(new CategoryData("Популярное"));
+        categoryDataList.add(new CategoryData("Covid"));
+        categoryDataList.add(new CategoryData("Комплексные"));
+        categoryDataList.add(new CategoryData("Чекапы"));
     }
 }
