@@ -22,14 +22,21 @@ public class FragmentAnalyzes extends Fragment {
 
     CatalogAdapter catalogAdapter;
     CategoryAdapter categoryAdapter;
+    NewsAdapter newsAdapter;
+
 
     ArrayList<CatalogData> catalogDataList;
     ArrayList<CategoryData> categoryDataList;
+    ArrayList<NewsData> newsDataList;
+
 
     SearchView searchView;
 
+
     RecyclerView recyclerViewCatalog;
     RecyclerView recyclerViewCategory;
+    RecyclerView recyclerViewNews;
+
 
     RelativeLayout layout;
     ConstraintLayout layoutCart;
@@ -89,6 +96,12 @@ public class FragmentAnalyzes extends Fragment {
         recyclerViewCategory.setHasFixedSize(true);
         categoryAdapter = new CategoryAdapter(getContext(), categoryDataList);
         recyclerViewCategory.setAdapter(categoryAdapter);
+
+
+        recyclerViewNews = view.findViewById(R.id.newsRecyclerView);
+        recyclerViewNews.setHasFixedSize(true);
+        newsAdapter = new NewsAdapter(getContext(), newsDataList);
+        recyclerViewNews.setAdapter(newsAdapter);
     }
 
     public void getButton(){
@@ -109,5 +122,11 @@ public class FragmentAnalyzes extends Fragment {
         categoryDataList.add(new CategoryData("Covid"));
         categoryDataList.add(new CategoryData("Комплексные"));
         categoryDataList.add(new CategoryData("Чекапы"));
+
+        newsDataList = new ArrayList<>();
+        newsDataList.add(new NewsData("Заголовок1", "Описание заголовка1", 8000));
+        newsDataList.add(new NewsData("Заголовок2", "Описание заголовка2", 5000));
+        newsDataList.add(new NewsData("Заголовок3", "Описание заголовка3", 6700));
+        newsDataList.add(new NewsData("Заголовок4", "Описание заголовка4", 300));
     }
 }
