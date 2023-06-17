@@ -67,8 +67,7 @@ public class FragmentAnalyzes extends Fragment {
         layout = view.findViewById(R.id.layoutFull);
 
         layoutCart = view.findViewById(R.id.layout_cart);
-
-        layout.removeView(layoutCart);
+        
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
