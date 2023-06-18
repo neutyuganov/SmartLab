@@ -90,7 +90,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/button_add_item_background"
+            android:background="@drawable/button_blue"
             android:drawableLeft="@drawable/cart"
             android:drawablePadding="16dp"
             android:fontFamily="@font/sf_pro_display_semibold"

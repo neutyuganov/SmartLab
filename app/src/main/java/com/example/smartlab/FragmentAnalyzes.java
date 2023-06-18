@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,10 +27,12 @@ public class FragmentAnalyzes extends Fragment {
     NewsAdapter newsAdapter;
 
 
-    ArrayList<CatalogData> catalogDataList;
+    ArrayList<CatalogData> catalogDataList, catalogDataListCart;
     ArrayList<CategoryData> categoryDataList;
     ArrayList<NewsData> newsDataList;
 
+    Button button_cart;
+    TextView textView_price;
 
     SearchView searchView;
 
@@ -63,11 +67,11 @@ public class FragmentAnalyzes extends Fragment {
         dataInitialize();
 
         searchView = view.findViewById(R.id.searchView);
-
         layout = view.findViewById(R.id.layoutFull);
-
         layoutCart = view.findViewById(R.id.layout_cart);
-        
+
+        button_cart = view.findViewById(R.id.button_cart);
+        textView_price = view.findViewById(R.id.textView_price);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -87,7 +91,7 @@ public class FragmentAnalyzes extends Fragment {
         recyclerViewCatalog = view.findViewById(R.id.catalogRecyclerView);
         recyclerViewCatalog.setLayoutManager(new LinearLayoutManager(getContext() ));
         recyclerViewCatalog.setHasFixedSize(true);
-        catalogAdapter = new CatalogAdapter(getContext(), catalogDataList);
+        catalogAdapter = new CatalogAdapter(getContext(), catalogDataList, catalogDataListCart);
         recyclerViewCatalog.setAdapter(catalogAdapter);
 
 

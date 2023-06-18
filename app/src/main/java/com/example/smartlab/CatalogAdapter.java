@@ -29,12 +29,13 @@ import java.util.List;
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.MyViewHolder>   {
 
     Context context;
-    ArrayList<CatalogData> catalogDataList;
+    ArrayList<CatalogData> catalogDataList, catalogDataListCart;
 
 
-    public CatalogAdapter(Context context, ArrayList<CatalogData> catalogDataList){
+    public CatalogAdapter(Context context, ArrayList<CatalogData> catalogDataList, ArrayList<CatalogData>  catalogDataListCart){
         this.context = context;
         this.catalogDataList = catalogDataList;
+        this.catalogDataListCart = catalogDataListCart;
     }
 
     @NonNull
