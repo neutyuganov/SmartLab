@@ -1,5 +1,6 @@
 package com.example.smartlab;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -34,19 +35,21 @@ import java.util.List;
 public class FragmentAnalyzes extends Fragment {
     Button button_cart;
     TextView textView_price;
-
     SearchView searchView;
 
     JSONArray arrayNews;
     JSONArray arrayCategory;
+    JSONArray arrayCatalog;
 
 
     private RecyclerView recyclerViewNews;
     private RecyclerView recyclerViewCategory;
+    private RecyclerView recyclerViewCatalog;
 
 
     private List<Object> viewItemsNews = new ArrayList<>();
     private List<Object> viewItemsCategory = new ArrayList<>();
+    private List<Object> viewItemsCatalog = new ArrayList<>();
 
 
     @Override
@@ -55,21 +58,24 @@ public class FragmentAnalyzes extends Fragment {
         View v = inflater.inflate(R.layout.fragment_analyzes, container, false);
 
         new GetTaskNews().execute(new JSONObject());
-        new GetTaskCataegory().execute(new JSONObject());
+        new GetTaskCategory().execute(new JSONObject());
+        new GetTaskCatalog().execute(new JSONObject());
 
 
         recyclerViewNews=(RecyclerView) v.findViewById(R.id.newsRecyclerView);
         recyclerViewCategory=(RecyclerView) v.findViewById(R.id.categoryRecyclerView);
+        recyclerViewCatalog=(RecyclerView) v.findViewById(R.id.catalogRecyclerView);
 
 
 // Присваиваем LayoutManager что бы изменить направление RecyclerView
         NewsAdapter adapterNews = new NewsAdapter(getContext(), viewItemsNews);
         CategoryAdapter adapterCategory = new CategoryAdapter(getContext(), viewItemsCategory);
+        CatalogAdapter adapterCatalog = new CatalogAdapter(getContext(), viewItemsCatalog);
 
 
         recyclerViewNews.setAdapter(adapterNews);
         recyclerViewCategory.setAdapter(adapterCategory);
-
+        recyclerViewCatalog.setAdapter(adapterCatalog);
 
         return v;
     }
@@ -81,7 +87,7 @@ public class FragmentAnalyzes extends Fragment {
 //                filterList.add(item);
 //            }
 //        }
-//        catalogAdapter.filterList(filterList);
+//        adapterCatalog.filterList(filterList);
 //    }
 
     @Override
@@ -92,6 +98,14 @@ public class FragmentAnalyzes extends Fragment {
 
         button_cart = view.findViewById(R.id.button_cart);
         textView_price = view.findViewById(R.id.textView_price);
+
+        button_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
@@ -108,6 +122,8 @@ public class FragmentAnalyzes extends Fragment {
 //            }
 //        });
     }
+
+
 
     private class GetTaskNews extends AsyncTask<JSONObject, Void, String> {
         @Override
@@ -149,7 +165,7 @@ public class FragmentAnalyzes extends Fragment {
             }
         }
 
-    private class GetTaskCataegory extends AsyncTask<JSONObject, Void, String> {
+    private class GetTaskCategory extends AsyncTask<JSONObject, Void, String> {
         @Override
         protected String doInBackground (JSONObject...jsonObjects){
             try {
@@ -177,6 +193,46 @@ public class FragmentAnalyzes extends Fragment {
                     JSONObject root = new JSONObject(buf.toString());
                     arrayCategory= root.getJSONArray("results");
                     addItemsFromJSONcategory();
+                    return(buf.toString());
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+    private class GetTaskCatalog extends AsyncTask<JSONObject, Void, String> {
+        @Override
+        protected String doInBackground (JSONObject...jsonObjects){
+            try {
+                InputStream stream = null;
+// Для буферизации текста из потока
+                BufferedReader reader = null;
+                HttpURLConnection connection = null;
+                try {
+// Присваиваем путь
+                    URL url = new URL("http://10.0.2.2:8000/api/catalog/");
+                    connection = (HttpURLConnection) url.openConnection();
+// Выбираем метод GET для запроса
+                    connection.setRequestMethod("GET");
+                    connection.setReadTimeout(10000);
+                    connection.connect();
+// Полученный результат разбиваем с помощью байтовых потоков
+                    stream = connection.getInputStream();
+                    reader = new BufferedReader(new InputStreamReader(stream));
+                    StringBuilder buf = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        buf.append(line).append("\n");
+                    }
+                    // Возвращаем разбитый по строкам результат
+                    JSONObject root = new JSONObject(buf.toString());
+                    arrayCatalog= root.getJSONArray("results");
+                    addItemsFromJSONcatalog();
                     return(buf.toString());
                 } catch (Exception e) {
                     e.getMessage();
@@ -221,5 +277,23 @@ public class FragmentAnalyzes extends Fragment {
         }
     }
 
-
+    private void addItemsFromJSONcatalog() {
+        try {
+// Заполняем Модель спаршенными данными
+            for (int i = 0; i < arrayCatalog.length(); ++i) {
+                JSONObject itemObj = arrayCatalog.getJSONObject(i);
+                String id = itemObj.getString("id");
+                String name = itemObj.getString("name");
+                String description = itemObj.getString("description");
+                String price = itemObj.getString("price");
+                String time_result = itemObj.getString("time_result");
+                String preparation = itemObj.getString("preparation");
+                String bio = itemObj.getString("bio");
+                CatalogData catalogs = new CatalogData(id, name, price, description, preparation, time_result, bio);
+                viewItemsCatalog.add(catalogs);
+            }
+        } catch (JSONException e) {
+        }
     }
+
+}

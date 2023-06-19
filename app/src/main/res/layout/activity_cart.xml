@@ -97,6 +97,7 @@
         android:background="@drawable/button_blue"
         android:fontFamily="@font/sf_pro_display_semibold"
         android:text="Перейти к оформлению заказа"
+        style="?android:attr/borderlessButtonStyle"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="17sp"
