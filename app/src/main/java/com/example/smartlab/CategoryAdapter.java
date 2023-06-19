@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -15,86 +16,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder>   {
+public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>   {
 
-    Context context;
-    ArrayList<CategoryData> categoryDataList;
-
-    public CategoryAdapter(Context context, ArrayList<CategoryData> categoryDataList){
+    private final Context context;
+    private final List<Object> listRecyclerItem;
+    public CategoryAdapter(Context context, List<Object> listRecyclerItem) {
         this.context = context;
-        this.categoryDataList = categoryDataList;
-    }
-
-    @NonNull
-    @Override
-    public CategoryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
-
-        return new MyViewHolder(v);
-    }
+        this.listRecyclerItem = listRecyclerItem;}
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
+        // Присваиваем поля для заполнения элемента RecyclerView
+        TextView id, category, name, description, price, time_result, preparation, bio;
+        public ItemViewHolder(View itemView) {
+            super(itemView);
+            name=(TextView) itemView.findViewById(R.id.button_category);
+        }}
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdapter.MyViewHolder holder, int position) {
-        CategoryData categoryData = categoryDataList.get(position);
-        holder.title_category.setText(categoryData.title);
-//        holder.title_category.setOnClickListener(new View.OnClickListener() {
-//            boolean flag = true;
-//            @Override
-//            public void onClick(View v) {
-//                if(flag) {
-//                    flag = false;
-//                    holder.button_add.setBackgroundResource(R.drawable.button_delite_item_background);
-//                    holder.button_add.setText("Удалить");
-//                    holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.buttonLogInActive));
-//                }
-//                else {
-//                    flag = true;
-//                    holder.button_add.setBackgroundResource(R.drawable.button_add_item_background);
-//                    holder.button_add.setText("Добавить");
-//                    holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.white));
-//                }
-//            }
-//        });
-//
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
-//                bottomSheetDialog.setContentView(R.layout.bottom_sheet_analyze);
-//
-//                Button title_category = bottomSheetDialog.findViewById(R.id.button_category);
-//
-//                title_category.setText(categoryData.title);
-//
-//                ImageButton button_back = bottomSheetDialog.findViewById(R.id.button_back_bs);
-//
-//                    button_back.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            bottomSheetDialog.dismiss();
-//                        }
-//                    });
-//
-//                bottomSheetDialog.show();
-//                }
-//        });
-    }
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+// Создаем представление из Layout
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
+        return new ItemViewHolder((v));}
 
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+// Заполняем элемент данными
+        ItemViewHolder _holder = (ItemViewHolder) holder;
+        CategoryData catalog = (CategoryData) listRecyclerItem.get(position);
+        _holder.name.setText(catalog.getTitle());
+
+// Пример реализации setOnClickListener для этого представления
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, catalog.getTitle(), Toast.LENGTH_SHORT).show();}});}
     @Override
     public int getItemCount() {
-        return categoryDataList.size();
-    }
+// Получает всёё количесво элементов RecyclerView
+        return listRecyclerItem.size();}}
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-
-        Button title_category;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            title_category = itemView.findViewById(R.id.button_category);
-        }
-    }
-}

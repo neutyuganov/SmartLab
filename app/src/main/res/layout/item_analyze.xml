@@ -24,7 +24,7 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/header"
+                android:id="@+id/header_catalog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sf_pro_display_medium"
@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/day"
+                android:id="@+id/time_result_catalog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -44,10 +44,10 @@
                 android:textSize="14sp"
                 android:text="2 дня"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header" />
+                app:layout_constraintTop_toBottomOf="@+id/header_catalog" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/price_catalog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -57,7 +57,7 @@
                 android:text="1800 ₽"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/day" />
+                app:layout_constraintTop_toBottomOf="@+id/time_result_catalog" />
 
             <Button
                 android:id="@+id/button_add_item"

@@ -1,5 +1,6 @@
 package com.example.smartlab;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,118 +19,207 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentAnalyzes extends Fragment {
-
-    CatalogAdapter catalogAdapter;
-    CategoryAdapter categoryAdapter;
-    NewsAdapter newsAdapter;
-
-
-    ArrayList<CatalogData> catalogDataList, catalogDataListCart;
-    ArrayList<CategoryData> categoryDataList;
-    ArrayList<NewsData> newsDataList;
-
     Button button_cart;
     TextView textView_price;
 
     SearchView searchView;
 
-
-    RecyclerView recyclerViewCatalog;
-    RecyclerView recyclerViewCategory;
-    RecyclerView recyclerViewNews;
+    JSONArray arrayNews;
+    JSONArray arrayCategory;
 
 
-    RelativeLayout layout;
-    ConstraintLayout layoutCart;
+    private RecyclerView recyclerViewNews;
+    private RecyclerView recyclerViewCategory;
+
+
+    private List<Object> viewItemsNews = new ArrayList<>();
+    private List<Object> viewItemsCategory = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_analyzes, container, false);
+        View v = inflater.inflate(R.layout.fragment_analyzes, container, false);
+
+        new GetTaskNews().execute(new JSONObject());
+        new GetTaskCataegory().execute(new JSONObject());
+
+
+        recyclerViewNews=(RecyclerView) v.findViewById(R.id.newsRecyclerView);
+        recyclerViewCategory=(RecyclerView) v.findViewById(R.id.categoryRecyclerView);
+
+
+// Присваиваем LayoutManager что бы изменить направление RecyclerView
+        NewsAdapter adapterNews = new NewsAdapter(getContext(), viewItemsNews);
+        CategoryAdapter adapterCategory = new CategoryAdapter(getContext(), viewItemsCategory);
+
+
+        recyclerViewNews.setAdapter(adapterNews);
+        recyclerViewCategory.setAdapter(adapterCategory);
+
+
+        return v;
     }
-    private void filter (String search){
-        ArrayList<CatalogData> filterList = new ArrayList<>();
-        for (CatalogData item : catalogDataList){
-            if (item.getTitle().toLowerCase().contains(search.toLowerCase())){
-                filterList.add(item);
-            }
-        }
-        catalogAdapter.filterList(filterList);
-    }
+
+//    private void filter (String search){
+//        ArrayList<CatalogData> filterList = new ArrayList<>();
+//        for (CatalogData item : catalogDataList){
+//            if (item.getTitle().toLowerCase().contains(search.toLowerCase())){
+//                filterList.add(item);
+//            }
+//        }
+//        catalogAdapter.filterList(filterList);
+//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        dataInitialize();
-
         searchView = view.findViewById(R.id.searchView);
-        layout = view.findViewById(R.id.layoutFull);
-        layoutCart = view.findViewById(R.id.layout_cart);
 
         button_cart = view.findViewById(R.id.button_cart);
         textView_price = view.findViewById(R.id.textView_price);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("newText", query);
-                return false;
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                Log.d("newText", query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                Log.d("newText", newText);
+//                filter(newText);
+//                return false;
+//            }
+//        });
+    }
+
+    private class GetTaskNews extends AsyncTask<JSONObject, Void, String> {
+        @Override
+            protected String doInBackground (JSONObject...jsonObjects){
+                try {
+                    InputStream stream = null;
+// Для буферизации текста из потока
+                    BufferedReader reader = null;
+                    HttpURLConnection connection = null;
+                    try {
+// Присваиваем путь
+                        URL url = new URL("http://10.0.2.2:8000/api/news/");
+                        connection = (HttpURLConnection) url.openConnection();
+// Выбираем метод GET для запроса
+                        connection.setRequestMethod("GET");
+                        connection.setReadTimeout(10000);
+                        connection.connect();
+// Полученный результат разбиваем с помощью байтовых потоков
+                        stream = connection.getInputStream();
+                        reader = new BufferedReader(new InputStreamReader(stream));
+                        StringBuilder buf = new StringBuilder();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            buf.append(line).append("\n");
+                        }
+                        // Возвращаем разбитый по строкам результат
+                        JSONObject root = new JSONObject(buf.toString());
+                        arrayNews= root.getJSONArray("results");
+                        addItemsFromJSONnews();
+                        return(buf.toString());
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        }
+
+    private class GetTaskCataegory extends AsyncTask<JSONObject, Void, String> {
+        @Override
+        protected String doInBackground (JSONObject...jsonObjects){
+            try {
+                InputStream stream = null;
+// Для буферизации текста из потока
+                BufferedReader reader = null;
+                HttpURLConnection connection = null;
+                try {
+// Присваиваем путь
+                    URL url = new URL("http://10.0.2.2:8000/api/category/");
+                    connection = (HttpURLConnection) url.openConnection();
+// Выбираем метод GET для запроса
+                    connection.setRequestMethod("GET");
+                    connection.setReadTimeout(10000);
+                    connection.connect();
+// Полученный результат разбиваем с помощью байтовых потоков
+                    stream = connection.getInputStream();
+                    reader = new BufferedReader(new InputStreamReader(stream));
+                    StringBuilder buf = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        buf.append(line).append("\n");
+                    }
+                    // Возвращаем разбитый по строкам результат
+                    JSONObject root = new JSONObject(buf.toString());
+                    arrayCategory= root.getJSONArray("results");
+                    addItemsFromJSONcategory();
+                    return(buf.toString());
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d("newText", newText);
-                filter(newText);
-                return false;
+            return null;
+        }
+    }
+
+
+
+    private void addItemsFromJSONnews() {
+            try {
+// Заполняем Модель спаршенными данными
+                for (int i = 0; i < arrayNews.length(); ++i) {
+                    JSONObject itemObj = arrayNews.getJSONObject(i);
+                    String id = itemObj.getString("id");
+                    String name = itemObj.getString("name");
+                    String description = itemObj.getString("description");
+                    String price = itemObj.getString("price");
+                    NewsData catalogs = new NewsData(id, name, description, price);
+                    viewItemsNews.add(catalogs);
+                }
+            } catch (JSONException e) {
             }
-        });
+        }
 
-        recyclerViewCatalog = view.findViewById(R.id.catalogRecyclerView);
-        recyclerViewCatalog.setLayoutManager(new LinearLayoutManager(getContext() ));
-        recyclerViewCatalog.setHasFixedSize(true);
-        catalogAdapter = new CatalogAdapter(getContext(), catalogDataList, catalogDataListCart);
-        recyclerViewCatalog.setAdapter(catalogAdapter);
-
-
-        recyclerViewCategory = view.findViewById(R.id.categoryRecyclerView);
-        recyclerViewCategory.setHasFixedSize(true);
-        categoryAdapter = new CategoryAdapter(getContext(), categoryDataList);
-        recyclerViewCategory.setAdapter(categoryAdapter);
-
-
-        recyclerViewNews = view.findViewById(R.id.newsRecyclerView);
-        recyclerViewNews.setHasFixedSize(true);
-        newsAdapter = new NewsAdapter(getContext(), newsDataList);
-        recyclerViewNews.setAdapter(newsAdapter);
+    private void addItemsFromJSONcategory() {
+        try {
+// Заполняем Модель спаршенными данными
+            for (int i = 0; i < arrayCategory.length(); ++i) {
+                JSONObject itemObj = arrayCategory.getJSONObject(i);
+                String id = itemObj.getString("id");
+                String name = itemObj.getString("name");
+                CategoryData catalogs = new CategoryData(id, name);
+                viewItemsCategory.add(catalogs);
+            }
+        } catch (JSONException e) {
+        }
     }
 
-    public void getButton(){
-        layout.addView(layoutCart);
+
     }
-    private void dataInitialize() {
-        catalogDataList = new ArrayList<>();
-        catalogDataList.add(new CatalogData("ПЦР-тест на определение РНК коронавируса стандартный", 1800, "Описание ПЦР-тест на определение РНКкоронавируса стандартный", "Подготовка к ПЦР-тест на определение РНК коронавируса стандартный", "2 дня", "Венозная кровь"));
-        catalogDataList.add(new CatalogData("ПЦР-тест на определение РНК коронавируса стандартный", 1200, "Описание ПЦР-тест на определение РНКкоронавируса стандартный", "Подготовка к ПЦР-тест на определение РНК коронавируса стандартный", "2 дня", "Венозная кровь"));
-        catalogDataList.add(new CatalogData("Биохимический анализ крови, базовый", 690, "Описание Биохимический анализ крови, базовый", "Подготовка к Биохимический анализ крови, базовый", "2 дня", "биология"));
-        catalogDataList.add(new CatalogData("Биохимический анализ крови, не базовый", 900, "Описание Биохимический анализ крови, не базовый", "Подготовка к Биохимический анализ крови, не базовый", "1 день", "Крутая кровь"));
-        catalogDataList.add(new CatalogData("СОЭ (капиллярная кровь)", 120, "Описание СОЭ (капиллярная кровь)", "Подготовка к СОЭ (капиллярная кровь)", "2 дня", "кровь"));
-        catalogDataList.add(new CatalogData("Клинический анализ крови с лейкоцитарной формулировкой", 300, "Описание Клинический анализ крови с лейкоцитарной формулировкой", "Подготовка к Клинический анализ крови с лейкоцитарной формулировкой", "1 день", "Аретериальная кровь"));
-
-
-        categoryDataList = new ArrayList<>();
-        categoryDataList.add(new CategoryData("Популярное"));
-        categoryDataList.add(new CategoryData("Covid"));
-        categoryDataList.add(new CategoryData("Комплексные"));
-        categoryDataList.add(new CategoryData("Чекапы"));
-
-        newsDataList = new ArrayList<>();
-        newsDataList.add(new NewsData("Заголовок1", "Описание заголовка1", 8000));
-        newsDataList.add(new NewsData("Заголовок2", "Описание заголовка2", 5000));
-        newsDataList.add(new NewsData("Заголовок3", "Описание заголовка3", 6700));
-        newsDataList.add(new NewsData("Заголовок4", "Описание заголовка4", 300));
-    }
-}
