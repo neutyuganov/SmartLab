@@ -39,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new GetTask().execute(new JSONObject());
-
         Window window = getWindow();
         window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         setContentView(R.layout.login_activity);
@@ -55,9 +53,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 bt_login.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Intent i = new Intent(LoginActivity.this, EmailVerifyActivity.class);
+                i.putExtra("email", email.getText().toString());
                 startActivity(i);
-
-
             }
         });
 
@@ -80,81 +77,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         }
-
-    private class GetTask extends AsyncTask<JSONObject, Void, String> {
-        @Override
-        protected String doInBackground(JSONObject... jsonObjects) {
-            try {
-                String parammetrs = "name=1&job=XXX";
-                byte[] data = null;
-                InputStream is = null;
-// Для буферизации текста из потока
-                BufferedReader reader = null;
-                HttpURLConnection conn = null;
-                try {
-// Присваиваем путь
-                    URL url = new URL("http://10.0.2.2:8000/api/signup/");
-                    conn = (HttpURLConnection) url.openConnection();
-//Выбираем метод POST для запроса и устанавливаем поля doOutput и doInput
-                    conn.setRequestMethod("POST");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    String email = "test3@mail.ru";
-                    String data1 = "{\n  \"email\": \""+ email +"\",\n  \"password\": \"1111\"\n}";
-
-                    byte[] out = data1.getBytes(StandardCharsets.UTF_8);
-
-                    OutputStream stream = conn.getOutputStream();
-                    stream.write(out);
-// Установим тип контента со отправляемыыми значениями
-                    //conn.setRequestProperty("Content-Length", "" + Integer.toString(parammetrs.getBytes().length));
-                   // OutputStream os = conn.getOutputStream();
-                  //  data = parammetrs.getBytes("UTF-8");
-                   // os.write(data);
-                    data = null;
-                    conn.connect();
-                    int responseCode = conn.getResponseCode();
-// Срабатывает если возвращаемое значение успешное
-                    if (responseCode == 200) {
-// Полученный результат разбиваем с помощью байтовых потоков
-                        is = conn.getInputStream();
-
-                        reader = new BufferedReader(new InputStreamReader(is));
-
-                        StringBuilder buf = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            buf.append(line).append(0);
-                        }
-                        String[] line1 = (buf.toString()).split("\"");
-                        String value = line1[7];
-// Возвращаем разбитый по строкам результат
-                        return (buf.toString());
-                    }
-                } catch (MalformedURLException e) {
-                    e.getMessage();
-                } catch (IOException e) {
-                    e.getMessage();
-                } catch (Exception e) {
-                    e.getMessage();
-                }
-// Закрываем открытые потоки и подключения
-                finally {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                    if (is != null) {
-                        is.close();
-                    }
-                    if (conn != null) {
-                        conn.disconnect();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
 }
