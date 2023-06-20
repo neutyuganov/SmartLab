@@ -20,13 +20,13 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private final TextView sum_price;
     private final Context context;
-    private final List<Object> listRecyclerItem;
+    private List<CatalogData> listRecyclerItem;
     private final List<Object> listItemCart;
     RecyclerItemClickListener listener;
 
     Double sum_price_double = 0.0;
 
-    public CatalogAdapter(Context context, List<Object> listRecyclerItem, TextView sum_price, List<Object> listItemCart, RecyclerItemClickListener listener) {
+    public CatalogAdapter(Context context, List<CatalogData> listRecyclerItem, TextView sum_price, List<Object> listItemCart, RecyclerItemClickListener listener) {
         this.context = context;
         this.sum_price = sum_price;
         this.listRecyclerItem = listRecyclerItem;
@@ -133,9 +133,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return listRecyclerItem.size();
     }
 
-//    public void filterList(ArrayList<CatalogData> catalogFilter){
-//        this.catalogDataList = catalogFilter;
-//        notifyDataSetChanged();
-//    }
+    public void filterList(List<CatalogData> catalogFilter){
+        this.listRecyclerItem = catalogFilter;
+        notifyDataSetChanged();
+    }
 }
 

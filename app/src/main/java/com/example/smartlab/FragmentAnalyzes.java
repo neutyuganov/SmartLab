@@ -48,10 +48,12 @@ public class FragmentAnalyzes extends Fragment {
     private RecyclerView recyclerViewCategory;
     private RecyclerView recyclerViewCatalog;
 
+    CatalogAdapter adapterCatalog;
+
 
     private List<Object> viewItemsNews = new ArrayList<>();
     private List<Object> viewItemsCategory = new ArrayList<>();
-    private List<Object> viewItemsCatalog = new ArrayList<>();
+    private List<CatalogData> viewItemsCatalog = new ArrayList<>();
     private List<Object> viewItemsCart = new ArrayList<>();
 
 
@@ -73,7 +75,7 @@ public class FragmentAnalyzes extends Fragment {
 // Присваиваем LayoutManager что бы изменить направление RecyclerView
         NewsAdapter adapterNews = new NewsAdapter(getContext(), viewItemsNews);
         CategoryAdapter adapterCategory = new CategoryAdapter(getContext(), viewItemsCategory);
-        CatalogAdapter adapterCatalog = new CatalogAdapter(getContext(), viewItemsCatalog, sum_price, viewItemsCart, new RecyclerItemClickListener() {
+        adapterCatalog = new CatalogAdapter(getContext(), viewItemsCatalog, sum_price, viewItemsCart, new RecyclerItemClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
                 if(viewItemsCart.size() == 0) cart_layout.setVisibility(View.GONE);
@@ -88,15 +90,15 @@ public class FragmentAnalyzes extends Fragment {
         return v;
     }
 
-//    private void filter (String search){
-//        ArrayList<CatalogData> filterList = new ArrayList<>();
-//        for (CatalogData item : catalogDataList){
-//            if (item.getTitle().toLowerCase().contains(search.toLowerCase())){
-//                filterList.add(item);
-//            }
-//        }
-//        adapterCatalog.filterList(filterList);
-//    }
+    private void filter (String search){
+        List<CatalogData> filterList = new ArrayList<>();
+        for (CatalogData item : viewItemsCatalog){
+            if (item.getTitle().toLowerCase().contains(search.toLowerCase())){
+                filterList.add(item);
+            }
+        }
+        adapterCatalog.filterList(filterList);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
@@ -119,20 +121,20 @@ public class FragmentAnalyzes extends Fragment {
             }
         });
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                Log.d("newText", query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                Log.d("newText", newText);
-//                filter(newText);
-//                return false;
-//            }
-//        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("newText", query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("newText", newText);
+                filter(newText);
+                return false;
+            }
+        });
     }
 
 
@@ -256,7 +258,6 @@ public class FragmentAnalyzes extends Fragment {
             return null;
         }
     }
-
 
 
     private void addItemsFromJSONnews() {
