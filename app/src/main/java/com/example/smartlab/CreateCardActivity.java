@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
@@ -24,12 +25,13 @@ public class CreateCardActivity extends AppCompatActivity {
     private static final String MY_SETTINGS = "my_settings";
     public static final String APP_PREFERENCES_CARD_FINISH = "cardFinish";
 
-
     EditText name, secondName, patronymic, dateBirthDay;
 
     Spinner gender;
 
     Button button_create_card;
+
+    TextView skip;
 
     int year_x, month_x, day_x;
     static final int DIALOG_DATE = 1;
@@ -49,6 +51,22 @@ public class CreateCardActivity extends AppCompatActivity {
         dateBirthDay = findViewById(R.id.editTextBirthDay);
 
         button_create_card = findViewById(R.id.buttonCreate);
+
+        skip = findViewById(R.id.buttonSkip);
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean(APP_PREFERENCES_CARD_FINISH, true);
+                editor.apply();
+                Intent i = new Intent(CreateCardActivity.this, MenuActivity.class);
+                startActivity(i);
+                finishAffinity();
+            }
+        });
 
         final Calendar calendar = Calendar.getInstance();
         year_x = calendar.get(Calendar.YEAR);
