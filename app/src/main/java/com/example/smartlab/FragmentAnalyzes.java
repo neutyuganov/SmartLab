@@ -34,8 +34,10 @@ import java.util.List;
 
 public class FragmentAnalyzes extends Fragment {
     Button button_cart;
-    TextView textView_price;
+    TextView sum_price;
     SearchView searchView;
+
+    ConstraintLayout cart_layout;
 
     JSONArray arrayNews;
     JSONArray arrayCategory;
@@ -50,6 +52,7 @@ public class FragmentAnalyzes extends Fragment {
     private List<Object> viewItemsNews = new ArrayList<>();
     private List<Object> viewItemsCategory = new ArrayList<>();
     private List<Object> viewItemsCatalog = new ArrayList<>();
+    private List<Object> viewItemsCart = new ArrayList<>();
 
 
     @Override
@@ -61,17 +64,22 @@ public class FragmentAnalyzes extends Fragment {
         new GetTaskCategory().execute(new JSONObject());
         new GetTaskCatalog().execute(new JSONObject());
 
+        sum_price = v.findViewById(R.id.textView_price);
 
         recyclerViewNews=(RecyclerView) v.findViewById(R.id.newsRecyclerView);
         recyclerViewCategory=(RecyclerView) v.findViewById(R.id.categoryRecyclerView);
         recyclerViewCatalog=(RecyclerView) v.findViewById(R.id.catalogRecyclerView);
 
-
 // Присваиваем LayoutManager что бы изменить направление RecyclerView
         NewsAdapter adapterNews = new NewsAdapter(getContext(), viewItemsNews);
         CategoryAdapter adapterCategory = new CategoryAdapter(getContext(), viewItemsCategory);
-        CatalogAdapter adapterCatalog = new CatalogAdapter(getContext(), viewItemsCatalog);
-
+        CatalogAdapter adapterCatalog = new CatalogAdapter(getContext(), viewItemsCatalog, sum_price, viewItemsCart, new RecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(View v, int position) {
+                if(viewItemsCart.size() == 0) cart_layout.setVisibility(View.GONE);
+                else cart_layout.setVisibility(View.VISIBLE);
+            }
+        });
 
         recyclerViewNews.setAdapter(adapterNews);
         recyclerViewCategory.setAdapter(adapterCategory);
@@ -97,7 +105,11 @@ public class FragmentAnalyzes extends Fragment {
         searchView = view.findViewById(R.id.searchView);
 
         button_cart = view.findViewById(R.id.button_cart);
-        textView_price = view.findViewById(R.id.textView_price);
+        sum_price = view.findViewById(R.id.textView_price);
+
+        cart_layout = view.findViewById(R.id.layout_cart);
+
+        cart_layout.setVisibility(View.GONE);
 
         button_cart.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,12 +18,21 @@ import java.util.List;
 
 public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>   {
 
+    private final TextView sum_price;
     private final Context context;
     private final List<Object> listRecyclerItem;
+    private final List<Object> listItemCart;
+    RecyclerItemClickListener listener;
 
-    public CatalogAdapter(Context context, List<Object> listRecyclerItem) {
+    Double sum_price_double = 0.0;
+
+    public CatalogAdapter(Context context, List<Object> listRecyclerItem, TextView sum_price, List<Object> listItemCart, RecyclerItemClickListener listener) {
         this.context = context;
-        this.listRecyclerItem = listRecyclerItem;}
+        this.sum_price = sum_price;
+        this.listRecyclerItem = listRecyclerItem;
+        this.listener = listener;
+        this.listItemCart = listItemCart;
+    }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         // Присваиваем поля для заполнения элемента RecyclerView
@@ -63,15 +72,25 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     flag = false;
                     _holder.button_add.setBackgroundResource(R.drawable.button_delite_item_background);
                     _holder.button_add.setText("Убрать");
-
                     _holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.buttonLogInActive));
+
+                    sum_price_double += Double.parseDouble(catalog.getPrice());
+                    sum_price.setText(sum_price_double.toString() + " ₽");
+
+                    listItemCart.add(catalog);
                 }
                 else {
                     flag = true;
                     _holder.button_add.setBackgroundResource(R.drawable.button_add_item_background);
                     _holder.button_add.setText("Добавить");
                     _holder.button_add.setTextColor(ContextCompat.getColor(context, R.color.white));
+
+                    sum_price_double -= Double.parseDouble(catalog.getPrice());
+                    sum_price.setText(sum_price_double.toString() + " ₽");
+
+                    listItemCart.remove(catalog);
                 }
+                listener.OnItemClick(v, position);
             }
         });
 
